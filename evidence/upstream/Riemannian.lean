@@ -281,4 +281,3 @@ instance [CompleteSpace E] {x : M} : CompleteSpace (TangentSpace I x) :=
   VectorBundle.completeSpace ℝ E ..
 
 end
-

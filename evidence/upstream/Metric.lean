@@ -181,4 +181,3 @@ public lemma isMetricCompatible_iff [FiniteDimensional ℝ F] :
   linear_combination h hX hσ hτ
 
 end CovariantDerivative
-

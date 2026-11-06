@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+"""Verify immutable source evidence without invoking Lean or accessing the network."""
+
+import hashlib
+import json
+from pathlib import Path
+import re
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def lean_code(text):
+    """Remove nested comments and string contents before checking trust markers."""
+    out = []
+    i = depth = 0
+    string = False
+    while i < len(text):
+        pair = text[i : i + 2]
+        if depth:
+            if pair == "/-":
+                depth += 1
+                i += 2
+            elif pair == "-/":
+                depth -= 1
+                i += 2
+            else:
+                i += 1
+        elif string:
+            if text[i] == "\\":
+                i += 2
+            elif text[i] == '"':
+                string = False
+                i += 1
+            else:
+                i += 1
+        elif pair == "/-":
+            depth = 1
+            out.append(" ")
+            i += 2
+        elif pair == "--":
+            end = text.find("\n", i)
+            i = len(text) if end < 0 else end
+        elif text[i] == '"':
+            string = True
+            out.append(" ")
+            i += 1
+        else:
+            out.append(text[i])
+            i += 1
+    assert not depth, "unclosed block comment"
+    assert not string, "unclosed string"
+    return "".join(out)
+
+
+def main():
+    manifest = json.loads((ROOT / "evidence/construction/source-manifest.json").read_text())
+    for item in manifest["files"]:
+        data = (ROOT / item["destination"]).read_bytes()
+        assert hashlib.sha256(data).hexdigest() == item["sha256"], item["destination"]
+        assert len(data.splitlines()) == item["lines"], item["destination"]
+    provenance = json.loads((ROOT / "evidence/provenance.json").read_text())
+    for item in provenance["files"]:
+        data = (ROOT / item["snapshot"]).read_bytes()
+        obj = b"blob " + str(len(data)).encode() + b"\0" + data
+        assert hashlib.sha1(obj).hexdigest() == item["blob_sha"], item["snapshot"]
+    files = sorted((ROOT / "MathlibExtensions").rglob("*.lean"))
+    files += sorted((ROOT / "LeviCivitaSmoothness").rglob("*.lean"))
+    for path in files:
+        code = lean_code(path.read_text())
+        assert not re.search(r"\b(sorry|admit|axiom)\b", code), str(path)
+        assert not re.search(r"set_option\s+debug\.skipKernelTC\s+true", code), str(path)
+        for module in re.findall(r"^import\s+(MathlibExtensions\S+|LeviCivitaSmoothness\S+)", code, re.M):
+            target = ROOT / (module.replace(".", "/") + ".lean")
+            assert target.is_file(), f"missing import: {module}"
+    assert (ROOT / "lean-toolchain").read_text().strip() == provenance["package"]["toolchain"]
+    print(json.dumps({
+        "source_files_verified": len(manifest["files"]),
+        "source_lines_verified": sum(x["lines"] for x in manifest["files"]),
+        "upstream_snapshots_verified": len(provenance["files"]),
+        "lean_files_scanned": len(files),
+        "forbidden_trust_markers": 0,
+        "lean_invoked": False,
+    }, indent=2))
+
+
+if __name__ == "__main__":
+    main()

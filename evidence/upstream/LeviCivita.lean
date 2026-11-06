@@ -413,4 +413,3 @@ public lemma isLeviCivitaConnection_leviCivitaConnection :
 end existence
 
 end CovariantDerivative
-

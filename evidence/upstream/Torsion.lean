@@ -155,4 +155,3 @@ lemma torsion_eq_zero_iff : cov.torsion = 0 ↔
     · apply mdifferentiableAt_extend
 
 end CovariantDerivative
-
