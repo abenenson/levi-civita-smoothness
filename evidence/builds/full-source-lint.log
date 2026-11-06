@@ -1,0 +1,9 @@
+FULL-LINT PASS LeviCivitaSmoothness/KoszulTransfer.lean
+FULL-LINT PASS LeviCivitaSmoothness/MathlibBridge.lean
+FULL-LINT PASS LeviCivitaSmoothness/MetricApplication.lean
+FULL-LINT PASS LeviCivitaSmoothness/HomRecovery.lean
+FULL-LINT PASS LeviCivitaSmoothness/AxiomAudit.lean
+FULL-LINT PASS LeviCivitaSmoothness/HomAxiomAudit.lean
+FULL-LINT PASS LeviCivitaSmoothness.lean
+FULL-LINT PASS MathlibExtensions.lean
+{"phase": "sprint-geometry-full-lint-01", "reason": "completed", "exit_code": 0, "elapsed_seconds": 48.332649080999545, "peak_candidate_apparent_file_bytes": 11600971703, "peak_cache_apparent_file_bytes": 110676394, "minimum_available_overlay_bytes": 18001481728}

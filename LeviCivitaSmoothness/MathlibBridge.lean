@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Adam Benenson. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Adam Benenson
+-/
 import Mathlib.Geometry.Manifold.VectorBundle.CovariantDerivative.LeviCivita
 import LeviCivitaSmoothness.KoszulTransfer
 
@@ -30,6 +35,8 @@ variable
 local notation "TM" => fun x : M => TangentSpace I x
 local notation "Γ∞" => Cₛ^∞⟮I; E, TM⟯
 
+/-- Mathlib's chosen Levi-Civita derivative agrees with the smooth Koszul construction on
+global smooth input sections, when both use the same metric. -/
 theorem leviCivitaConnection_eq_covDerivFromMetric
     (g : Bundle.ContMDiffRiemannianMetric I ∞ E TM)
     (hinner : ∀ (x : M) (u v : TangentSpace I x), inner ℝ u v = g.inner x u v)

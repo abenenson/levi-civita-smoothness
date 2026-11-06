@@ -67,8 +67,10 @@ The original [`evidence/validation.json`](evidence/validation.json) records the 
 commit `d9da9f6`, which established smooth-pair evaluation. The additional
 [`evidence/hom-validation.json`](evidence/hom-validation.json) records the successful full
 global `C^∞` connection-class proof and its three axiom probes, again using only the same three
-standard axioms. Existing baseline proof sources and hashes are unchanged. Reproduce the checks
-with:
+standard axioms. The later [documentation and lint checkpoint](docs/lint-checkpoint.md) adds
+headers and the missing theorem documentation while preserving all mathematical proof code.
+Its refreshed strict checks and full-source lint cover the current file hashes. Reproduce the
+strict proof checks with:
 
 ```sh
 python3 scripts/verify_evidence.py
@@ -79,3 +81,11 @@ lake --rehash --wfail build +LeviCivitaSmoothness.HomRecovery:olean +LeviCivitaS
 
 Finite derivative loss, arbitrary-set local input regularity, and a current-master port remain
 separate work. This package does not claim those theorems or an accepted upstream contribution.
+
+All eight new proof, entry, and audit files also passed full-source
+`#lint+ docBlame docBlameThm`, with all 16 selected environment linters and zero errors per file.
+The mechanical syntax/style checks from the library's `verify-mathlib-bar.sh` passed separately.
+These checks do not assert that Mathlib's entire optional standard syntax-linter set was enabled.
+Exact probes, per-file logs, hashes, and guarded receipts are in
+[`evidence/lint-validation.json`](evidence/lint-validation.json). The unchanged 19-file source
+cone has its separate strict-build and hash certificate; it is outside this eight-file lint scope.

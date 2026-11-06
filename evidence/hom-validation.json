@@ -14,6 +14,15 @@
       "log": "evidence/builds/hom-recovery.log",
       "log_sha256": "c9b0e114615e009626ef02b1c28468dd2118145f2ca34cc4675a08f6f17283ba",
       "resource_receipt": "evidence/builds/hom-recovery-resources.json"
+    },
+    {
+      "name": "documentation-strict-recheck",
+      "exit_code": 0,
+      "reason": "completed",
+      "elapsed_seconds": 22.62128391999977,
+      "log": "evidence/builds/docs-strict.log",
+      "log_sha256": "f5647f2e38aa148b8e929a16fc4fabbd0ac91c40e9237b0d16ddf3108bb4d171",
+      "resource_receipt": "evidence/builds/docs-strict-resources.json"
     }
   ],
   "audited_axioms": [
@@ -22,8 +31,8 @@
     "Quot.sound"
   ],
   "new_proof_source_hashes": {
-    "LeviCivitaSmoothness/HomRecovery.lean": "78f0e8bb56c0487bf485b60a15da43bf29ed24761cef0fdbd2659cc3ddf3ca7c",
-    "LeviCivitaSmoothness/HomAxiomAudit.lean": "716782da782c8dcee48a366df8a1eee59152e001137821a574b91f3831b5d680"
+    "LeviCivitaSmoothness/HomRecovery.lean": "88d47181b0aa599828f95e1829cd6b4a1407358ca26a6528e1e5776a44e88fe9",
+    "LeviCivitaSmoothness/HomAxiomAudit.lean": "02e0489afba1115d82045bc98aa85828dddefc85ef5aee1d1b1a68c6511a4860"
   },
   "newly_established": "Mathlib global ContMDiffCovariantDerivative (leviCivitaConnection I M) infinity, under the preserved smooth-manifold, finite-dimensional, Hausdorff, complete-space, and same-metric hypotheses. A canonical metric installation is included.",
   "public_import": "LeviCivitaSmoothness.HomRecovery",
@@ -33,5 +42,19 @@
     "Compilation on current Mathlib master / Lean v4.36.0-rc2",
     "Upstream maintainer acceptance or public submission"
   ],
+  "prior_proof_source_hashes": {
+    "LeviCivitaSmoothness/HomRecovery.lean": "78f0e8bb56c0487bf485b60a15da43bf29ed24761cef0fdbd2659cc3ddf3ca7c",
+    "LeviCivitaSmoothness/HomAxiomAudit.lean": "716782da782c8dcee48a366df8a1eee59152e001137821a574b91f3831b5d680"
+  },
+  "documentation_refresh": {
+    "parent_commit": "270e6d9aca7dd1860d6cbdca7f306e489bf482dd",
+    "proof_files_unchanged_except_added_copyright_headers_and_theorem_docstring": [
+      "LeviCivitaSmoothness/KoszulTransfer.lean",
+      "LeviCivitaSmoothness/MathlibBridge.lean",
+      "LeviCivitaSmoothness/MetricApplication.lean",
+      "LeviCivitaSmoothness/HomRecovery.lean"
+    ],
+    "exact_extracted_files_unchanged": 19
+  },
   "public_record_note": "Worker locations and origin metadata were normalized for publication. These retained records describe historical verification runs; normalization is not a new Lean build."
 }

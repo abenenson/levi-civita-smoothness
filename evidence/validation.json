@@ -23,6 +23,15 @@
       "log": "evidence/builds/bridge-final.log",
       "log_sha256": "bcc700371d395724faee6b8ee35c33390d17058c92c30edcea0c7af03419f352",
       "resource_receipt": "evidence/builds/bridge-final-resources.json"
+    },
+    {
+      "name": "documentation-strict-recheck",
+      "exit_code": 0,
+      "reason": "completed",
+      "elapsed_seconds": 22.62128391999977,
+      "log": "evidence/builds/docs-strict.log",
+      "log_sha256": "f5647f2e38aa148b8e929a16fc4fabbd0ac91c40e9237b0d16ddf3108bb4d171",
+      "resource_receipt": "evidence/builds/docs-strict-resources.json"
     }
   ],
   "audited_axioms": [
@@ -31,19 +40,36 @@
     "Quot.sound"
   ],
   "new_proof_source_hashes": {
+    "LeviCivitaSmoothness/AxiomAudit.lean": "99cf44451832d788a90d6d399bed9cc1dd00c27d507a18bb5df08172cc73101c",
+    "LeviCivitaSmoothness/KoszulTransfer.lean": "db3890e6b94ed3c531d0e0c2dba02246a954bf12a5b3cfed1b7e7b183ce571af",
+    "LeviCivitaSmoothness/MathlibBridge.lean": "377cdb6c831011210352f45758e9158d02be0e4b4ba20bcfd7295312762f341c",
+    "LeviCivitaSmoothness/MetricApplication.lean": "df2d805d36f4c1f495db93017b021ea04b12a56bf65a1987fb61c7aa2f09c576",
+    "LeviCivitaSmoothness.lean": "51f3019397421d1c4d82e0cd23c22fb712c5dc5d3be0158a49e1fd75679de430"
+  },
+  "scope": "Global smooth tangent section pairs, on Mathlib v4.34.1, with the metric installed from explicit smooth metric data.",
+  "not_established": [
+    "Finite-regularity derivative-loss theorem",
+    "Regularity on arbitrary sets for locally regular inputs",
+    "Compilation on current Mathlib master / Lean v4.36.0-rc2",
+    "Upstream maintainer acceptance or public submission"
+  ],
+  "prior_proof_source_hashes": {
     "LeviCivitaSmoothness/AxiomAudit.lean": "c9768816811ec1f6edcf89782fcee4d6e669b1ba6aa29f1576da631de2db084a",
     "LeviCivitaSmoothness/KoszulTransfer.lean": "c9a527af863ddf2d1e575ec266c202e2fd5d98d6be8e6c94ded5507dcb85f2b7",
     "LeviCivitaSmoothness/MathlibBridge.lean": "c6f2fde62dfffe1e2cfe2c874194f2f9ba481e7c8800923b3a899e2cec515851",
     "LeviCivitaSmoothness/MetricApplication.lean": "9049d62170dc9bb8e7bfea9b894582f164a0c6083cad0ad65d3222283781be40",
     "LeviCivitaSmoothness.lean": "413d36611dc836bf02d2c9d61c9fa52e7d47d451bf75b897072d649a288c6c8a"
   },
-  "scope": "Global smooth tangent section pairs, on Mathlib v4.34.1, with the metric installed from explicit smooth metric data.",
-  "not_established": [
-    "ContMDiffCovariantDerivative instance for full Hom-valued output",
-    "Finite-regularity derivative-loss theorem",
-    "Regularity on arbitrary sets for locally regular inputs",
-    "Compilation on current Mathlib master / Lean v4.36.0-rc2",
-    "Upstream maintainer acceptance or public submission"
-  ],
+  "documentation_refresh": {
+    "parent_commit": "270e6d9aca7dd1860d6cbdca7f306e489bf482dd",
+    "proof_files_unchanged_except_added_copyright_headers_and_theorem_docstring": [
+      "LeviCivitaSmoothness/KoszulTransfer.lean",
+      "LeviCivitaSmoothness/MathlibBridge.lean",
+      "LeviCivitaSmoothness/MetricApplication.lean",
+      "LeviCivitaSmoothness/HomRecovery.lean"
+    ],
+    "exact_extracted_files_unchanged": 19
+  },
+  "subsequent_scope_extension": "The full global Hom-valued C-infinity regularity class is established separately in evidence/hom-validation.json.",
   "public_record_note": "Worker locations and origin metadata were normalized for publication. These retained records describe historical verification runs; normalization is not a new Lean build."
 }

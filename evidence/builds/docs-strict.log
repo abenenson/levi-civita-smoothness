@@ -1,0 +1,30 @@
+✔ [2897/2904] Built MathlibExtensions (2.7s)
+✔ [2898/2904] Built LeviCivitaSmoothness.KoszulTransfer (3.5s)
+✔ [2899/2904] Built LeviCivitaSmoothness.MathlibBridge (4.4s)
+✔ [2900/2904] Built LeviCivitaSmoothness.MetricApplication (3.8s)
+✔ [2901/2904] Built LeviCivitaSmoothness (2.4s)
+✔ [2902/2904] Built LeviCivitaSmoothness.HomRecovery (4.6s)
+ℹ [2903/2904] Built LeviCivitaSmoothness.AxiomAudit (2.5s)
+info: LeviCivitaSmoothness/AxiomAudit.lean:13:0: 'MathlibExtensions.Geometry.Manifold.VectorBundle.SmoothTangentSection.exists_leviCivitaTangentConnectionFromMetric' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: LeviCivitaSmoothness/AxiomAudit.lean:14:0: 'LeviCivitaSmoothness.eq_covDerivFromMetric_of_koszul' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: LeviCivitaSmoothness/AxiomAudit.lean:15:0: 'LeviCivitaSmoothness.leviCivitaConnection_eq_covDerivFromMetric' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: LeviCivitaSmoothness/AxiomAudit.lean:16:0: 'LeviCivitaSmoothness.contMDiff_leviCivitaConnection_smooth_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: LeviCivitaSmoothness/AxiomAudit.lean:17:0: 'LeviCivitaSmoothness.contMDiff_leviCivitaConnection_fromMetric' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ℹ [2904/2904] Built LeviCivitaSmoothness.HomAxiomAudit (2.5s)
+info: LeviCivitaSmoothness/HomAxiomAudit.lean:10:0: 'LeviCivitaSmoothness.contMDiff_hom_of_smooth_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: LeviCivitaSmoothness/HomAxiomAudit.lean:11:0: 'LeviCivitaSmoothness.contMDiffCovariantDerivative_leviCivitaConnection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: LeviCivitaSmoothness/HomAxiomAudit.lean:12:0: 'LeviCivitaSmoothness.contMDiffCovariantDerivative_leviCivitaConnection_fromMetric' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Build completed successfully (2904 jobs).
+{"phase": "sprint-geometry-docs-strict-01", "reason": "completed", "exit_code": 0, "elapsed_seconds": 39.89960435099965, "peak_candidate_apparent_file_bytes": 11600962365, "peak_cache_apparent_file_bytes": 110676394, "minimum_available_overlay_bytes": 18001498112}

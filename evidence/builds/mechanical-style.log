@@ -1,0 +1,20 @@
+Checking 8 file(s) against Mathlib quality bar...
+
+▸ LeviCivitaSmoothness/KoszulTransfer.lean
+
+▸ LeviCivitaSmoothness/MathlibBridge.lean
+
+▸ LeviCivitaSmoothness/MetricApplication.lean
+
+▸ LeviCivitaSmoothness/HomRecovery.lean
+
+▸ LeviCivitaSmoothness/AxiomAudit.lean
+
+▸ LeviCivitaSmoothness/HomAxiomAudit.lean
+
+▸ LeviCivitaSmoothness.lean
+
+▸ MathlibExtensions.lean
+
+────────────────────────────────────────
+✓ All checks passed (8 file(s))

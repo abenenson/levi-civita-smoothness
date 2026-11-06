@@ -73,7 +73,7 @@ def main():
             target = ROOT / (module.replace(".", "/") + ".lean")
             assert target.is_file(), f"missing import: {module}"
     assert (ROOT / "lean-toolchain").read_text().strip() == provenance["package"]["toolchain"]
-    for name in ["validation.json", "hom-validation.json"]:
+    for name in ["validation.json", "hom-validation.json", "lint-validation.json"]:
         validation_path = ROOT / "evidence" / name
         if not validation_path.exists():
             continue
@@ -86,6 +86,16 @@ def main():
             assert hashlib.sha256(log).hexdigest() == phase["log_sha256"], phase["log"]
             receipt = json.loads((ROOT / phase["resource_receipt"]).read_text())
             assert receipt["exit_code"] == 0 and receipt["reason"] == "completed", phase["name"]
+        if "file_results" in validation:
+            assert {x["source"] for x in validation["file_results"]} == set(
+                validation["new_proof_source_hashes"])
+            for item in validation["file_results"]:
+                assert item["status"] == "passed" and item["exit_code"] == 0, item["source"]
+                assert item["environment_linter_count"] == 16, item["source"]
+                for path_key, hash_key in [("log", "log_sha256"),
+                                           ("probe_snapshot", "probe_sha256")]:
+                    data = (ROOT / item[path_key]).read_bytes()
+                    assert hashlib.sha256(data).hexdigest() == item[hash_key], item[path_key]
     print(json.dumps({
         "source_files_verified": len(manifest["files"]),
         "source_lines_verified": sum(x["lines"] for x in manifest["files"]),

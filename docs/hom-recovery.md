@@ -1,7 +1,8 @@
 # Bounded global smoothness step
 
-The branch `hom-bundle-recovery` starts at the validated commit `d9da9f6`. It leaves the
-existing proof sources and their validation hashes unchanged.
+The branch `hom-bundle-recovery` starts at the validated commit `d9da9f6`. Its mathematical
+Hom-recovery step preserved the earlier proof sources. The subsequent documentation/lint
+checkpoint adds headers and theorem documentation while preserving every mathematical proof.
 
 The new target is Mathlib's existing class, not a new connection interface:
 
