@@ -1,0 +1,49 @@
+{
+  "observed_date": "2026-11-06",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "mathlib_commit": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "exact_source_files": 19,
+  "exact_source_lines": 5037,
+  "strict_builds_passed": true,
+  "phases": [
+    {
+      "name": "exact-core",
+      "exit_code": 0,
+      "reason": "completed",
+      "elapsed_seconds": 86.12102106500015,
+      "log": "evidence/builds/exact-core.log",
+      "log_sha256": "cfb24ce0e4145ca796189d5c1449af1732667bb9712a08fd56326b14319cc691",
+      "resource_receipt": "evidence/builds/exact-core-resources.json"
+    },
+    {
+      "name": "bridge-final",
+      "exit_code": 0,
+      "reason": "completed",
+      "elapsed_seconds": 9.862719835000007,
+      "log": "evidence/builds/bridge-final.log",
+      "log_sha256": "bcc700371d395724faee6b8ee35c33390d17058c92c30edcea0c7af03419f352",
+      "resource_receipt": "evidence/builds/bridge-final-resources.json"
+    }
+  ],
+  "audited_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "new_proof_source_hashes": {
+    "LeviCivitaSmoothness/AxiomAudit.lean": "c9768816811ec1f6edcf89782fcee4d6e669b1ba6aa29f1576da631de2db084a",
+    "LeviCivitaSmoothness/KoszulTransfer.lean": "c9a527af863ddf2d1e575ec266c202e2fd5d98d6be8e6c94ded5507dcb85f2b7",
+    "LeviCivitaSmoothness/MathlibBridge.lean": "c6f2fde62dfffe1e2cfe2c874194f2f9ba481e7c8800923b3a899e2cec515851",
+    "LeviCivitaSmoothness/MetricApplication.lean": "9049d62170dc9bb8e7bfea9b894582f164a0c6083cad0ad65d3222283781be40",
+    "LeviCivitaSmoothness.lean": "413d36611dc836bf02d2c9d61c9fa52e7d47d451bf75b897072d649a288c6c8a"
+  },
+  "scope": "Global smooth tangent section pairs, on Mathlib v4.34.1, with the metric installed from explicit smooth metric data.",
+  "not_established": [
+    "ContMDiffCovariantDerivative instance for full Hom-valued output",
+    "Finite-regularity derivative-loss theorem",
+    "Regularity on arbitrary sets for locally regular inputs",
+    "Compilation on current Mathlib master / Lean v4.36.0-rc2",
+    "Upstream maintainer acceptance or public submission"
+  ],
+  "public_record_note": "Worker locations and origin metadata were normalized for publication. These retained records describe historical verification runs; normalization is not a new Lean build."
+}

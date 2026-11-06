@@ -73,13 +73,24 @@ def main():
             target = ROOT / (module.replace(".", "/") + ".lean")
             assert target.is_file(), f"missing import: {module}"
     assert (ROOT / "lean-toolchain").read_text().strip() == provenance["package"]["toolchain"]
+    validation_path = ROOT / "evidence/validation.json"
+    if validation_path.exists():
+        validation = json.loads(validation_path.read_text())
+        for path, expected in validation["new_proof_source_hashes"].items():
+            assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == expected, path
+        for phase in validation["phases"]:
+            assert phase["exit_code"] == 0 and phase["reason"] == "completed", phase["name"]
+            log = (ROOT / phase["log"]).read_bytes()
+            assert hashlib.sha256(log).hexdigest() == phase["log_sha256"], phase["log"]
+            receipt = json.loads((ROOT / phase["resource_receipt"]).read_text())
+            assert receipt["exit_code"] == 0 and receipt["reason"] == "completed", phase["name"]
     print(json.dumps({
         "source_files_verified": len(manifest["files"]),
         "source_lines_verified": sum(x["lines"] for x in manifest["files"]),
         "upstream_snapshots_verified": len(provenance["files"]),
         "lean_files_scanned": len(files),
         "forbidden_trust_markers": 0,
-        "lean_invoked": False,
+        "this_check_invokes_lean": False,
     }, indent=2))
 
 

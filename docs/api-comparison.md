@@ -61,7 +61,7 @@ terms agree via `TangentSection.toDerivation_apply`, whose right-hand side is
 products used by Mathlib; a second unrelated `RiemannianBundle` instance would invalidate the
 comparison.
 
-The exact smooth bridge target is
+The compile-checked smooth bridge equation is
 
 ```
 CovariantDerivative.leviCivitaConnection I M (fun x => Y x) x (X x)
@@ -69,6 +69,8 @@ CovariantDerivative.leviCivitaConnection I M (fun x => Y x) x (X x)
 ```
 
 for bundled global smooth `X,Y`, with Mathlib's Riemannian bundle instantiated from `g`.
+It is proved in `LeviCivitaSmoothness/MathlibBridge.lean`; the canonical metric application is
+checked in `LeviCivitaSmoothness/MetricApplication.lean`. Both use the pinned v4.34.1 package.
 Pairing against global smooth test sections determines a tangent vector: the library's
 `SmoothTangentSection.exists_eq_at` supplies a test section with any prescribed value, without
 requiring `SigmaCompactSpace M`. This avoids assuming that global differentiable and smooth
@@ -92,8 +94,8 @@ smoothness proof only needs finitely many frame sections and takes the finite in
 of their neighborhoods; an upstream port must preserve that distinction.
 
 This is a different smoothness route from upstream's pointwise tensoriality/musical-isomorphism
-construction. Once the two outputs agree, the library's local Gram-matrix proof transfers smoothness of
-evaluation on global smooth pairs. It does not yet supply the full Hom-valued regularity class.
+construction. The checked bridge identifies the two outputs and transfers the library's smoothness
+of evaluation on global smooth pairs. It does not yet supply the full Hom-valued regularity class.
 
 ## Remaining work for an upstream regularity theorem
 

@@ -1,0 +1,18 @@
+✔ [2899/2901] Built LeviCivitaSmoothness.MetricApplication (3.9s)
+ℹ [2900/2901] Built LeviCivitaSmoothness.AxiomAudit (2.4s)
+info: LeviCivitaSmoothness/AxiomAudit.lean:4:0: 'MathlibExtensions.Geometry.Manifold.VectorBundle.SmoothTangentSection.exists_leviCivitaTangentConnectionFromMetric' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: LeviCivitaSmoothness/AxiomAudit.lean:5:0: 'LeviCivitaSmoothness.eq_covDerivFromMetric_of_koszul' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: LeviCivitaSmoothness/AxiomAudit.lean:6:0: 'LeviCivitaSmoothness.leviCivitaConnection_eq_covDerivFromMetric' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: LeviCivitaSmoothness/AxiomAudit.lean:7:0: 'LeviCivitaSmoothness.contMDiff_leviCivitaConnection_smooth_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: LeviCivitaSmoothness/AxiomAudit.lean:8:0: 'LeviCivitaSmoothness.contMDiff_leviCivitaConnection_fromMetric' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+✔ [2901/2901] Built LeviCivitaSmoothness (2.5s)
+Build completed successfully (2901 jobs).
+{"phase": "sprint-geometry-final-01", "reason": "completed", "exit_code": 0, "elapsed_seconds": 20.136481500000173, "peak_candidate_apparent_file_bytes": 10592161298, "peak_cache_apparent_file_bytes": 110676394, "minimum_available_overlay_bytes": 20641222656}

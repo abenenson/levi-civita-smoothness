@@ -22,6 +22,18 @@ opportunity is regularity of its chosen connection, with explicit attention to l
 inputs and loss of derivatives. the library's result only constructs an operator on global smooth
 sections. These statements must be bridged; they are not interchangeable.
 
+The new bridge now proves, on the pinned Mathlib version, that its chosen Levi-Civita derivative
+agrees with the library's smooth output on global smooth input pairs. It transfers `ContMDiff ... ∞`
+regularity to that evaluation. The canonical application installs the Riemannian structure
+from the supplied metric, so no independent metric agreement assumption is required:
+
+* [`KoszulTransfer.lean`](LeviCivitaSmoothness/KoszulTransfer.lean): pointwise uniqueness and
+  transfer of smoothness from the Koszul identities.
+* [`MathlibBridge.lean`](LeviCivitaSmoothness/MathlibBridge.lean): identification with
+  `CovariantDerivative.leviCivitaConnection` and smoothness on global smooth pairs.
+* [`MetricApplication.lean`](LeviCivitaSmoothness/MetricApplication.lean):
+  `contMDiff_leviCivitaConnection_fromMetric`, using precisely the metric supplied as data.
+
 See [`docs/api-comparison.md`](docs/api-comparison.md) for the exact interfaces and limitations,
 and [`evidence/upstream/pr-status.json`](evidence/upstream/pr-status.json) for overlapping
 upstream work. No public PR, issue, or comment has been created from this package.
@@ -32,6 +44,20 @@ The 19-file extracted source cone passed `lake --rehash --wfail build` on qualif
 4.34.1 with the pinned Mathlib dependency. No extracted file was changed. The source hashes and
 upstream Git blob hashes also pass `python3 scripts/verify_evidence.py`.
 
-The new Mathlib bridge is undergoing a separate compilation and axiom audit. See the build
-evidence under [`evidence/builds`](evidence/builds); source inspection alone is not reported as
-kernel validation.
+The new bridge, canonical metric application, both library roots, and
+[`AxiomAudit.lean`](LeviCivitaSmoothness/AxiomAudit.lean) passed a separate strict build.
+The audited source existence and bridge theorems depend only on `propext`, `Classical.choice`,
+and `Quot.sound`; no new axioms or placeholders are introduced.
+
+See [`evidence/validation.json`](evidence/validation.json) for exact scope, proof hashes, and
+successful build receipts. Reproduce the checks with:
+
+```sh
+python3 scripts/verify_evidence.py
+lake --rehash --wfail build +MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistenceTheorem:olean
+lake --rehash --wfail build +LeviCivitaSmoothness.AxiomAudit:olean +LeviCivitaSmoothness:olean +MathlibExtensions:olean
+```
+
+Full Hom-valued connection regularity, finite derivative loss, arbitrary-set local input
+regularity, and a current-master port remain separate work. This package does not claim those
+theorems or an accepted upstream contribution.

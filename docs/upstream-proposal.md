@@ -13,12 +13,13 @@ The candidate bridge has two layers:
 
 The bridge uses an explicit equality between the supplied metric's bilinear forms and the
 inner products of the scoped `RiemannianBundle` instance. This prevents a hidden mismatch of
-metrics. Instantiating the bundle from the supplied metric should discharge that premise by
-reflexivity; a compile-checked application is part of the intended validation.
+metrics. `MetricApplication.lean` installs the bundle from the supplied metric and discharges
+that premise by reflexivity; this application has passed the strict build and axiom audit.
 
 This is a local candidate on Mathlib v4.34.1. It is not yet a current-master patch and must not
-be advertised as the finite-regularity smoothness theorem. Kernel validation status is
-reported separately in the README and build evidence.
+be advertised as the finite-regularity smoothness theorem. The exact extracted proof cone and
+the new bridge passed separate strict builds on qualified Lean 4.34.1. The axiom audit reports
+only `propext`, `Classical.choice`, and `Quot.sound`.
 
 ## Next narrow theorem: global smooth connection class
 
