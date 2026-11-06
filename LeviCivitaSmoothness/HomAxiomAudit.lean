@@ -1,0 +1,5 @@
+import LeviCivitaSmoothness.HomRecovery
+
+#print axioms LeviCivitaSmoothness.contMDiff_hom_of_smooth_apply
+#print axioms LeviCivitaSmoothness.contMDiffCovariantDerivative_leviCivitaConnection
+#print axioms LeviCivitaSmoothness.contMDiffCovariantDerivative_leviCivitaConnection_fromMetric

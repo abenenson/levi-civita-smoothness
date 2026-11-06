@@ -1,0 +1,26 @@
+{
+  "command": [
+    "lake",
+    "--rehash",
+    "--wfail",
+    "build",
+    "+LeviCivitaSmoothness.HomRecovery:olean",
+    "+LeviCivitaSmoothness.HomAxiomAudit:olean"
+  ],
+  "cwd": "/workspace/verification-open-source/levi-civita-smoothness",
+  "exit_code": 0,
+  "reason": "completed",
+  "elapsed_seconds": 10.490769450999323,
+  "sampled_peak_tree_rss_bytes": 3362709504,
+  "memory_ceiling_bytes": 17179869184,
+  "cpu_affinity": [
+    0,
+    1
+  ],
+  "surviving_non_zombie_pids": [],
+  "rss_sampling_seconds": 0.2,
+  "per_process_address_space_limit": true,
+  "adopted_descendants_reaped": 0,
+  "child_subreaper": true,
+  "cancelled_signal": null
+}

@@ -1,0 +1,11 @@
+✔ [2898/2899] Built LeviCivitaSmoothness.HomRecovery (4.8s)
+ℹ [2899/2899] Built LeviCivitaSmoothness.HomAxiomAudit (2.6s)
+info: LeviCivitaSmoothness/HomAxiomAudit.lean:3:0: 'LeviCivitaSmoothness.contMDiff_hom_of_smooth_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: LeviCivitaSmoothness/HomAxiomAudit.lean:4:0: 'LeviCivitaSmoothness.contMDiffCovariantDerivative_leviCivitaConnection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: LeviCivitaSmoothness/HomAxiomAudit.lean:5:0: 'LeviCivitaSmoothness.contMDiffCovariantDerivative_leviCivitaConnection_fromMetric' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Build completed successfully (2899 jobs).
+{"phase": "sprint-geometry-hom-build-04", "reason": "completed", "exit_code": 0, "elapsed_seconds": 28.897285236999778, "peak_candidate_apparent_file_bytes": 11322395642, "peak_cache_apparent_file_bytes": 110676394, "minimum_available_overlay_bytes": 18285801472}

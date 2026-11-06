@@ -1,8 +1,9 @@
 # Levi-Civita smoothness preparation
 
-This repository isolates the smooth Levi-Civita construction from the library and prepares a bridge to
-Mathlib's existing `CovariantDerivative.leviCivitaConnection`. It is a local preparation package,
-not an upstream contribution already accepted or submitted.
+This repository proves global smoothness of Mathlib's `CovariantDerivative.leviCivitaConnection`
+from a smooth metric, using the library's isolated smooth construction and a checked identification of
+their outputs. It is a local preparation package, not an upstream contribution already accepted
+or submitted.
 
 The extracted source is pinned to the library commit
 `recorded-source-baseline`. The 19 files (5,037 lines) are byte-for-byte
@@ -34,6 +35,19 @@ from the supplied metric, so no independent metric agreement assumption is requi
 * [`MetricApplication.lean`](LeviCivitaSmoothness/MetricApplication.lean):
   `contMDiff_leviCivitaConnection_fromMetric`, using precisely the metric supplied as data.
 
+Import `LeviCivitaSmoothness.HomRecovery` for the full global regularity result:
+
+```lean
+CovariantDerivative.ContMDiffCovariantDerivative
+  (CovariantDerivative.leviCivitaConnection I M) ∞
+```
+
+[`HomRecovery.lean`](LeviCivitaSmoothness/HomRecovery.lean) recovers smoothness of the full
+Hom-valued derivative from its evaluations on global smooth sections. The theorem
+`contMDiffCovariantDerivative_leviCivitaConnection_fromMetric` installs the supplied metric and
+proves this class under the preserved smooth-manifold, finite-dimensional, Hausdorff, and
+complete-space hypotheses. An explicit metric-agreement version is also provided.
+
 See [`docs/api-comparison.md`](docs/api-comparison.md) for the exact interfaces and limitations,
 and [`evidence/upstream/pr-status.json`](evidence/upstream/pr-status.json) for overlapping
 upstream work. No public PR, issue, or comment has been created from this package.
@@ -49,15 +63,19 @@ The new bridge, canonical metric application, both library roots, and
 The audited source existence and bridge theorems depend only on `propext`, `Classical.choice`,
 and `Quot.sound`; no new axioms or placeholders are introduced.
 
-See [`evidence/validation.json`](evidence/validation.json) for exact scope, proof hashes, and
-successful build receipts. Reproduce the checks with:
+The original [`evidence/validation.json`](evidence/validation.json) records the baseline
+commit `d9da9f6`, which established smooth-pair evaluation. The additional
+[`evidence/hom-validation.json`](evidence/hom-validation.json) records the successful full
+global `C^∞` connection-class proof and its three axiom probes, again using only the same three
+standard axioms. Existing baseline proof sources and hashes are unchanged. Reproduce the checks
+with:
 
 ```sh
 python3 scripts/verify_evidence.py
 lake --rehash --wfail build +MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistenceTheorem:olean
 lake --rehash --wfail build +LeviCivitaSmoothness.AxiomAudit:olean +LeviCivitaSmoothness:olean +MathlibExtensions:olean
+lake --rehash --wfail build +LeviCivitaSmoothness.HomRecovery:olean +LeviCivitaSmoothness.HomAxiomAudit:olean
 ```
 
-Full Hom-valued connection regularity, finite derivative loss, arbitrary-set local input
-regularity, and a current-master port remain separate work. This package does not claim those
-theorems or an accepted upstream contribution.
+Finite derivative loss, arbitrary-set local input regularity, and a current-master port remain
+separate work. This package does not claim those theorems or an accepted upstream contribution.

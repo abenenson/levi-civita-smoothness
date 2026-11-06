@@ -73,8 +73,10 @@ def main():
             target = ROOT / (module.replace(".", "/") + ".lean")
             assert target.is_file(), f"missing import: {module}"
     assert (ROOT / "lean-toolchain").read_text().strip() == provenance["package"]["toolchain"]
-    validation_path = ROOT / "evidence/validation.json"
-    if validation_path.exists():
+    for name in ["validation.json", "hom-validation.json"]:
+        validation_path = ROOT / "evidence" / name
+        if not validation_path.exists():
+            continue
         validation = json.loads(validation_path.read_text())
         for path, expected in validation["new_proof_source_hashes"].items():
             assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == expected, path

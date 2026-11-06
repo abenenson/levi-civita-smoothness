@@ -35,11 +35,12 @@ requires regularity of each evaluation at the point; no quantifier exchange to a
 neighborhood for every vector is used. The existing finite-dimensional criterion internally
 reduces to finitely many coordinate tests.
 
-`LeviCivitaSmoothness/HomRecovery.lean` contains the candidate proof and
-`LeviCivitaSmoothness/HomAxiomAudit.lean` contains its transitive axiom probes. At this analysis
-commit these new modules have not been elaborated. The compiler lane remains externally
-coordinated. The only newly needed Mathlib cache target is
-`Mathlib.Analysis.Calculus.ContDiff.FiniteDimension`.
+`LeviCivitaSmoothness/HomRecovery.lean` contains the proof and
+`LeviCivitaSmoothness/HomAxiomAudit.lean` contains its transitive axiom probes. Both passed the
+strict `lake --rehash --wfail build` gate in the qualified serial compiler lane. All three new
+declarations depend only on `propext`, `Classical.choice`, and `Quot.sound`.
+`evidence/hom-validation.json` records the successful build receipt and exact source hashes.
+The only new Mathlib cache target was `Mathlib.Analysis.Calculus.ContDiff.FiniteDimension`.
 
 Finite regularity, section inputs regular only on arbitrary subsets, and compilation on current
 Mathlib master remain outside this step. Existing upstream PR #43042 develops a more general

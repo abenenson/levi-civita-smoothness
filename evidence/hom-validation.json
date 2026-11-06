@@ -1,0 +1,37 @@
+{
+  "observed_date": "2026-11-06",
+  "base_validated_commit": "d9da9f6",
+  "analysis_commit": "058894a",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "mathlib_commit": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "strict_builds_passed": true,
+  "phases": [
+    {
+      "name": "hom-recovery",
+      "exit_code": 0,
+      "reason": "completed",
+      "elapsed_seconds": 10.490769450999323,
+      "log": "evidence/builds/hom-recovery.log",
+      "log_sha256": "c9b0e114615e009626ef02b1c28468dd2118145f2ca34cc4675a08f6f17283ba",
+      "resource_receipt": "evidence/builds/hom-recovery-resources.json"
+    }
+  ],
+  "audited_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "new_proof_source_hashes": {
+    "LeviCivitaSmoothness/HomRecovery.lean": "78f0e8bb56c0487bf485b60a15da43bf29ed24761cef0fdbd2659cc3ddf3ca7c",
+    "LeviCivitaSmoothness/HomAxiomAudit.lean": "716782da782c8dcee48a366df8a1eee59152e001137821a574b91f3831b5d680"
+  },
+  "newly_established": "Mathlib global ContMDiffCovariantDerivative (leviCivitaConnection I M) infinity, under the preserved smooth-manifold, finite-dimensional, Hausdorff, complete-space, and same-metric hypotheses. A canonical metric installation is included.",
+  "public_import": "LeviCivitaSmoothness.HomRecovery",
+  "not_established": [
+    "Finite-regularity derivative-loss theorem",
+    "Regularity on arbitrary sets for locally regular inputs",
+    "Compilation on current Mathlib master / Lean v4.36.0-rc2",
+    "Upstream maintainer acceptance or public submission"
+  ],
+  "public_record_note": "Worker locations and origin metadata were normalized for publication. These retained records describe historical verification runs; normalization is not a new Lean build."
+}

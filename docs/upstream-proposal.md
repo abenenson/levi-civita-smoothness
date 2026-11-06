@@ -21,18 +21,21 @@ be advertised as the finite-regularity smoothness theorem. The exact extracted p
 the new bridge passed separate strict builds on qualified Lean 4.34.1. The axiom audit reports
 only `propext`, `Classical.choice`, and `Quot.sound`.
 
-## Next narrow theorem: global smooth connection class
+## Proved next step: global smooth connection class
 
 For the global `ContMDiffCovariantDerivative ... ∞` instance, input sections are globally
 smooth: `ContMDiffOn ... (∞ + 1) ... univ` reduces to ordinary global smoothness. Thus there
-is no additional arbitrary-set input localization obligation at this stage. The missing
-argument is Hom-bundle regularity of `x ↦ leviCivitaConnection I M Y x`.
+is no additional arbitrary-set input localization obligation at this stage. The Hom-bundle
+regularity of `x ↦ leviCivitaConnection I M Y x` is now proved in `HomRecovery.lean`.
 
-the library already supplies finitely many globally smooth vector fields which form a local frame
-around any point (`exists_localConst_finBasis_nhds`). Testing the Hom-valued output on these
-finitely many sections and using its linearity should recover smoothness in a trivialization.
-The general alternative is the API in open upstream PR #43042. The next implementation
-should depend on, or coordinate with, that PR rather than duplicate its general theorem.
+the library supplies global smooth extensions of chart-constant test sections near any point. The new
+proof combines these with `contMDiffAt_hom_bundle`, a source chart, and the existing
+finite-dimensional criterion `contDiffWithinAt_clm_apply`. It proves Mathlib's full global
+`ContMDiffCovariantDerivative ... ∞` class, with explicit metric agreement and canonical
+metric-installation versions. No common neighborhood for every test vector is assumed.
+The more general Hom-bundle API in open upstream PR #43042 remains overlapping work to
+coordinate with before an eventual public proposal. This local preparation does not replace
+that general theorem or its planned finite-regularity extensions.
 
 ## Eventual finite-regularity theorem
 

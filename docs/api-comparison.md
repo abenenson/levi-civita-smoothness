@@ -95,19 +95,22 @@ of their neighborhoods; an upstream port must preserve that distinction.
 
 This is a different smoothness route from upstream's pointwise tensoriality/musical-isomorphism
 construction. The checked bridge identifies the two outputs and transfers the library's smoothness
-of evaluation on global smooth pairs. It does not yet supply the full Hom-valued regularity class.
+of evaluation on global smooth pairs. The subsequent checked `HomRecovery.lean` module recovers
+the full Hom-valued regularity class at index `∞`, under the same smooth-metric hypotheses.
 
 ## Remaining work for an upstream regularity theorem
 
-* Recover Hom-bundle regularity from regularity after evaluation on local frame sections.
-  Open PR [#43042](https://github.com/leanprover-community/mathlib4/pull/43042) already develops
-  the general `ContMDiff.clm_bundle_of_apply` criterion. Avoid duplicating that work.
+* The global `∞` case of Hom-bundle recovery is now proved in this package using the existing
+  finite-dimensional operator criterion and global smooth extensions of chart-constant test
+  sections. Open PR [#43042](https://github.com/leanprover-community/mathlib4/pull/43042)
+  develops the more general `ContMDiff.clm_bundle_of_apply` criterion; coordinate further
+  generalizations with that work.
 * Localize the inputs. the library's solver consumes globally smooth sections. A pointwise smoothness
   argument must extend sections agreeing on a neighborhood, rather than assert that every
   locally smooth section is globally smooth. Existing bump-function tools can support this,
   but the corresponding connection-germ bridge must be stated and checked. This is needed
-  for the stronger arbitrary-set/local-input theorem; the global `C^∞` regularity class can
-  instead be approached using globally smooth test sections forming a local finite frame.
+  for the stronger arbitrary-set/local-input theorem. The proved global `C^∞` regularity class
+  uses global smooth test sections obtained from local chart constants.
 * Track finite derivative loss. The advertised upstream goal is a `C^(n+2)` manifold and
   `C^(n+1)` metric yielding a `C^n` connection. Replacing every `∞` in the library by `n` is invalid:
   differentiating metric pairings and taking Lie brackets each costs derivatives, and the
