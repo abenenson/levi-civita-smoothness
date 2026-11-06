@@ -1,0 +1,121 @@
+{
+  "repository": "the standalone mathematical library",
+  "commit": "recorded-source-baseline",
+  "cache_verified_against_git": true,
+  "files": [
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/Connection.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/Connection.lean",
+      "sha256": "364e9b94f2e116b7b94438d49221b67a1a7723cf8e60cd612e3ac46c13ba90c0",
+      "lines": 180
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentConnectionFromMetric.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentConnectionFromMetric.lean",
+      "sha256": "b9500118c28dd1752a0f3fd080d7207924d4d344668eebaadcf2d12b7b4da1be",
+      "lines": 757
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistence.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistence.lean",
+      "sha256": "85e44ad721f007c379f09a1560d601755bfecd733db4abd3871ce75cfe7f4ece",
+      "lines": 931
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistenceLocal.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistenceLocal.lean",
+      "sha256": "85463bba04d4edbc4d96c39f18815fe39a968f2c9ffc00621bc9f79cbe63004a",
+      "lines": 534
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistenceTheorem.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistenceTheorem.lean",
+      "sha256": "16b16f2894b3af6a8a34f33db53105c0f0b15bacb0f14331b6ddeccd637bdb8b",
+      "lines": 283
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentUniqueness.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentUniqueness.lean",
+      "sha256": "85c608af7a393d56215d25c1a38e3c4e4807e36b7b3f4f7c0faef24cb47f1985",
+      "lines": 183
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/RiemannianTangentBundle.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/RiemannianTangentBundle.lean",
+      "sha256": "4d28be42cd839b9738647fc1b3edc7616b6e66df98a2f2f9c0df4628a298aa14",
+      "lines": 123
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/RiemannianTangentInnerCInfinity.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/RiemannianTangentInnerCInfinity.lean",
+      "sha256": "7a682a742100de0c2f91bfc41266e731c94db5cbf88c67c4936687cd17aa14ff",
+      "lines": 157
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentConnection.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentConnection.lean",
+      "sha256": "8e0a624c36c5184c48f55a4143e9a02d25917b99028a4b1dad0f789651f99cee",
+      "lines": 107
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentLieBracket.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentLieBracket.lean",
+      "sha256": "e8865815b95e29196cdcd8534153b3b20f82ed3fdc1e393110f0bbde1a611664",
+      "lines": 104
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionCInfinityLinearAtPoint.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionCInfinityLinearAtPoint.lean",
+      "sha256": "dbf68372c176691b4a7023dff654d8d206b292942506b1eb48d0d1b5a182ce4c",
+      "lines": 346
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionDerivation.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionDerivation.lean",
+      "sha256": "e788d32f64bf07509c03fc89607b605757631cdb92d017fbcec49102576868b8",
+      "lines": 109
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionLieBracket.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionLieBracket.lean",
+      "sha256": "018fe4b6f03d00f64f239f82ebae39fe1bf787c05665672098801bffbb5e837a",
+      "lines": 291
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionLocalDecomposition.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionLocalDecomposition.lean",
+      "sha256": "61c3a765ca3b2c87972462412f40779a2a2e7fbd31735727d552f1c0c55a1931",
+      "lines": 202
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionPrescribedValue.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionPrescribedValue.lean",
+      "sha256": "d4c9bfbd360a82ec3b6d5f0812726410ab63b0864dd5c6628c7c359ac9685a05",
+      "lines": 379
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSpaceFiniteDimensional.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSpaceFiniteDimensional.lean",
+      "sha256": "86ad87b2d2804413319c5cd1d1bc367d7f5d6c8f775cb400048e985d7c7cb80a",
+      "lines": 69
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentVectorFieldDerivation.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentVectorFieldDerivation.lean",
+      "sha256": "092649ea65b5afc3206dff057b67a31066fea1d60313133380b1fefcd855a94f",
+      "lines": 180
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorField/LieBracket.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorField/LieBracket.lean",
+      "sha256": "5c77c244e072fb1434aa3fbd86131d907e05a60896aa4f777317f3997d702f6c",
+      "lines": 60
+    },
+    {
+      "source": "MathlibExtensions/Geometry/Manifold/VectorField/Pullback.lean",
+      "destination": "MathlibExtensions/Geometry/Manifold/VectorField/Pullback.lean",
+      "sha256": "ba2611d19c162fda7ead89e3011bd62f68f1faa44af75ad7d440181e1df0d541",
+      "lines": 42
+    }
+  ]
+}

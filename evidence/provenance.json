@@ -1,0 +1,46 @@
+{
+  "observed_at_utc": "2026-11-06",
+  "upstream": {
+    "repository": "leanprover-community/mathlib4",
+    "commit": "e293c42021c641734f10655c39b8023fa88ff6ee",
+    "toolchain": "leanprover/lean4:v4.36.0-rc2",
+    "branch_observation_url": "https://api.github.com/repos/leanprover-community/mathlib4/branches/master"
+  },
+  "package": {
+    "commit": "recorded-source-baseline",
+    "toolchain": "leanprover/lean4:v4.34.1",
+    "mathlib_commit": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  },
+  "files": [
+    {
+      "path": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+      "blob_sha": "2e5c000a47453618109123dd3aee965f1361375e",
+      "snapshot": "evidence/upstream/Basic.lean",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/e293c42021c641734f10655c39b8023fa88ff6ee/Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean"
+    },
+    {
+      "path": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Metric.lean",
+      "blob_sha": "0031cc57f4c95f0c44ef2361ad39ce2fc448cce2",
+      "snapshot": "evidence/upstream/Metric.lean",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/e293c42021c641734f10655c39b8023fa88ff6ee/Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Metric.lean"
+    },
+    {
+      "path": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Torsion.lean",
+      "blob_sha": "316cc332dab38f8fa50c1d8a61deba08d49060cb",
+      "snapshot": "evidence/upstream/Torsion.lean",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/e293c42021c641734f10655c39b8023fa88ff6ee/Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Torsion.lean"
+    },
+    {
+      "path": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/LeviCivita.lean",
+      "blob_sha": "251def93248af1238778fd73b4835f2742444216",
+      "snapshot": "evidence/upstream/LeviCivita.lean",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/e293c42021c641734f10655c39b8023fa88ff6ee/Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/LeviCivita.lean"
+    },
+    {
+      "path": "Mathlib/Geometry/Manifold/VectorBundle/Riemannian.lean",
+      "blob_sha": "0e8483798a579e148273a4eead19acd919f8f506",
+      "snapshot": "evidence/upstream/Riemannian.lean",
+      "url": "https://github.com/leanprover-community/mathlib4/blob/e293c42021c641734f10655c39b8023fa88ff6ee/Mathlib/Geometry/Manifold/VectorBundle/Riemannian.lean"
+    }
+  ]
+}

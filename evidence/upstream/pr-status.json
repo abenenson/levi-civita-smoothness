@@ -1,0 +1,62 @@
+[
+  {
+    "number": 45737,
+    "url": "https://github.com/leanprover-community/mathlib4/pull/45737",
+    "title": "feat: make `basify` handle WithTop ENat better",
+    "state": "open",
+    "merged": false,
+    "merge_commit_sha": "f473f4aef1b8abe7175c706f9000bb29280e4d19",
+    "updated_at": "2026-11-06T20:16:34Z",
+    "head": {
+      "sha": "f1f9541bc8273e5ca5579cc8bff194e8d2b63a54",
+      "repo": "grunweg/mathlib4",
+      "ref": "enat-lemmas"
+    },
+    "body": "- add many more tests about `basify` for ENat and `WithTop ENat`\r\n- add a few missing lemmas about `ofNat` in ENat and WithTop ENat,\r\n- prove that `a + ∞ = ∞` in WithTop ENat, when a is a natural number converted directly to WithTop ENat\r\n- tag `re_refl` with `basify_simps`, so cases such as `a + ∞ = ∞` are closed automatically.\r\n\r\nSome tests highlight further issues in basify's handling (such as, norm_cast not being idempotent, or `basify` making no progress at all on some goals). These are out of scope for this PR, but recording them as TODOs at least reminds us what needs to be done still.\r\n\r\nThese questions appear when counting derivatives in differential geometry, as the degree of smoothness of functions is `WithTop ENat`-valued. This particular PR is from the project to prove smoothness of the Levi-Civita connection, as part of the project towards geodesics, curvature and Riemannian geometry.\r\n\r\n"
+  },
+  {
+    "number": 43042,
+    "url": "https://github.com/leanprover-community/mathlib4/pull/43042",
+    "title": "feat: `ContMDiff.clm_bundle_of_apply` and friends",
+    "state": "open",
+    "merged": false,
+    "merge_commit_sha": "c149971bf7521ebdba461ef74a3835c7cdfcfc24",
+    "updated_at": "2026-10-23T00:45:06Z",
+    "head": {
+      "sha": "27722d0e8fdde9f6b43af9e285aba6f16e47e969",
+      "repo": "grunweg/mathlib4",
+      "ref": "contmdiff-of-clm-bundle-apply"
+    },
+    "body": "Future PRs will add versions of these allowing for the loss of derivatives:\r\nlet's start with these versions as the required modifications are straight-forward.\r\n\r\nWe add the analogous lemmas for differentiability also (and comment when this requires further work out of this PR's scope).\r\n\r\nFrom the path towards smoothness of the Levi-Civita connection and Riemannian geometry.\r\n\r\nCo-authored-by: Patrick Massot <patrickmassot@free.fr>\r\n\r\n"
+  },
+  {
+    "number": 44711,
+    "url": "https://github.com/leanprover-community/mathlib4/pull/44711",
+    "title": "[Merged by Bors] - feat: ContMDiff.mvfderiv and friends",
+    "state": "closed",
+    "merged": false,
+    "merge_commit_sha": "e0b56dfa9d197db5796c462e6bc65d2854bf6a08",
+    "updated_at": "2026-10-14T16:01:12Z",
+    "head": {
+      "sha": "8da45aa1b3d51f0b1cd5ad48a39901bcc55be8e7",
+      "repo": "grunweg/mathlib4",
+      "ref": "cn-mvfderiv"
+    },
+    "body": "The `mvfderiv` of a `C^n` map is `C^m`, if `m + 1 ≤ n`: mathlib already knew that the `tangentMap` of `f` was `C^n`;\r\nthe `mvfderiv` are the fiber-wise components of the tangent map, hence also `C^n`.\r\n\r\nThis is necessary for defining the curvature tensor: from the Riemannian geometry project.\r\nThis can also be used for an alternative proof of smoothness of the Levi-Civita connection.\r\n\r\n"
+  },
+  {
+    "number": 26221,
+    "url": "https://github.com/leanprover-community/mathlib4/pull/26221",
+    "title": "Mr. Covariant Derivatives",
+    "state": "open",
+    "merged": false,
+    "merge_commit_sha": null,
+    "updated_at": "2026-09-19T18:49:23Z",
+    "head": {
+      "sha": "c487a9a1d25ee47368d6e095f701fc633bb6847a",
+      "repo": "grunweg/mathlib4",
+      "ref": "MR-covariant-derivatives"
+    },
+    "body": "This PR is a work in progress, and will land in individual pieces. Some contributions include\r\n- additional API for differentiability of vector bundle sections\r\n- finite sums, differences and scalar products of smooth sections are smooth\r\n- the same result for mdifferentiable\r\n- add missing mdifferentiable congruence lemmas\r\n- define smooth local frames of a vector bundle\r\n- a general tensoriality criterion\r\n- define covariant derivatives, proving their tensoriality and that convex combinations of these are covariant derivatives\r\n- the classification of covariant derivatives over a trivial bundle\r\n- additional API for the Lie bracket of vector fields: the product rule (one sorry left!), Lie bracket at zero vanishes\r\n- torsion of a connection, torsion-free connections\r\n- Gram-Schmidt procedure for sections of a Riemannian vector bundle\r\n- orthonormal frames on a Riemannian vector bundle\r\n- connections compatible with a metric; definition of the Levi-Civita connection\r\n- uniqueness of the Levi-Civita connection\r\n- Christoffel symbols\r\n- in progress: existence of the Levi-Civita connection (connection done; torsion-freeness and compatibility in progress)\r\n- custom elaborators for sections in a vector bundle (converting dependent to non-dependent functions)\r\n- custom elaborators for inferring a model with corners, in differentiability/smoothness definitions\r\n- a `#check'` command and tactic which only shows explicit arguments\r\n\r\nMore to come soon!\r\n\r\nJoint work with @PatrickMassot; supported by the FMJH.\r\n\r\n"
+  }
+]
