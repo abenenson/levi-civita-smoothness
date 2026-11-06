@@ -1,0 +1,17 @@
+[
+  "Mathlib.Geometry.Manifold.Algebra.LieGroup",
+  "Mathlib.Geometry.Manifold.Algebra.SmoothFunctions",
+  "Mathlib.Geometry.Manifold.BumpFunction",
+  "Mathlib.Geometry.Manifold.ContMDiff.Defs",
+  "Mathlib.Geometry.Manifold.ContMDiffMFDeriv",
+  "Mathlib.Geometry.Manifold.DerivationBundle",
+  "Mathlib.Geometry.Manifold.MFDeriv.FDeriv",
+  "Mathlib.Geometry.Manifold.PartitionOfUnity",
+  "Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection",
+  "Mathlib.Geometry.Manifold.VectorBundle.CovariantDerivative.LeviCivita",
+  "Mathlib.Geometry.Manifold.VectorBundle.Riemannian",
+  "Mathlib.Geometry.Manifold.VectorBundle.Tangent",
+  "Mathlib.Geometry.Manifold.VectorField.LieBracket",
+  "Mathlib.Geometry.Manifold.VectorField.Pullback",
+  "Mathlib.RingTheory.Derivation.Lie"
+]

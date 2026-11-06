@@ -98,7 +98,9 @@ evaluation on global smooth pairs. It does not yet supply the full Hom-valued re
 * Localize the inputs. the library's solver consumes globally smooth sections. A pointwise smoothness
   argument must extend sections agreeing on a neighborhood, rather than assert that every
   locally smooth section is globally smooth. Existing bump-function tools can support this,
-  but the corresponding connection-germ bridge must be stated and checked.
+  but the corresponding connection-germ bridge must be stated and checked. This is needed
+  for the stronger arbitrary-set/local-input theorem; the global `C^∞` regularity class can
+  instead be approached using globally smooth test sections forming a local finite frame.
 * Track finite derivative loss. The advertised upstream goal is a `C^(n+2)` manifold and
   `C^(n+1)` metric yielding a `C^n` connection. Replacing every `∞` in the library by `n` is invalid:
   differentiating metric pairings and taking Lie brackets each costs derivatives, and the
