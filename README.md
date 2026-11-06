@@ -8,6 +8,8 @@ The extracted source is pinned to the library commit
 `recorded-source-baseline`. The 19 files (5,037 lines) are byte-for-byte
 verified against that Git object; their hashes are in
 [`evidence/construction/source-manifest.json`](evidence/construction/source-manifest.json).
+The copied file headers retain their historical project descriptions; the current-upstream
+comparison below supersedes any novelty claims in that prose.
 
 The package uses Lean **4.34.1** and Mathlib
 `d13f23b723b8a846827a245b89c10fc7d3f11612`. Current upstream was separately inspected at
