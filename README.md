@@ -28,5 +28,10 @@ upstream work. No public PR, issue, or comment has been created from this packag
 
 ## Validation status
 
-The extraction and source hashes have been verified. Lean compilation is pending the shared
-serial build lane. Source inspection alone is not reported as kernel validation.
+The 19-file extracted source cone passed `lake --rehash --wfail build` on qualified Lean
+4.34.1 with the pinned Mathlib dependency. No extracted file was changed. The source hashes and
+upstream Git blob hashes also pass `python3 scripts/verify_evidence.py`.
+
+The new Mathlib bridge is undergoing a separate compilation and axiom audit. See the build
+evidence under [`evidence/builds`](evidence/builds); source inspection alone is not reported as
+kernel validation.

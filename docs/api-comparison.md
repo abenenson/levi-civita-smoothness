@@ -86,6 +86,11 @@ sections are the same test class.
    frame, then use locality of `ContMDiff` to get global smoothness.
 5. Package the output as a smooth-section connection and verify torsion and compatibility.
 
+The local representation theorem has quantifiers `∃ W, ∀ Z, ∀ᶠ x in 𝓝 x₀, ...`. It does
+not itself provide one neighborhood valid for all test sections simultaneously. The global
+smoothness proof only needs finitely many frame sections and takes the finite intersection
+of their neighborhoods; an upstream port must preserve that distinction.
+
 This is a different smoothness route from upstream's pointwise tensoriality/musical-isomorphism
 construction. Once the two outputs agree, the library's local Gram-matrix proof transfers smoothness of
 evaluation on global smooth pairs. It does not yet supply the full Hom-valued regularity class.

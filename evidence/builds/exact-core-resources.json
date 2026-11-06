@@ -1,0 +1,25 @@
+{
+  "command": [
+    "lake",
+    "--rehash",
+    "--wfail",
+    "build",
+    "+MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistenceTheorem:olean"
+  ],
+  "cwd": "/workspace/verification-open-source/levi-civita-smoothness",
+  "exit_code": 0,
+  "reason": "completed",
+  "elapsed_seconds": 86.12102106500015,
+  "sampled_peak_tree_rss_bytes": 5856665600,
+  "memory_ceiling_bytes": 17179869184,
+  "cpu_affinity": [
+    0,
+    1
+  ],
+  "surviving_non_zombie_pids": [],
+  "rss_sampling_seconds": 0.2,
+  "per_process_address_space_limit": true,
+  "adopted_descendants_reaped": 0,
+  "child_subreaper": true,
+  "cancelled_signal": null
+}
