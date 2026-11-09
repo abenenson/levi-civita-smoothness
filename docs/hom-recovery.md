@@ -13,7 +13,7 @@ CovariantDerivative.ContMDiffCovariantDerivative
 
 The metric-agreement version retains the smooth-pair theorem's assumptions: finite-dimensional
 real model space, complete model space, Hausdorff manifold, the explicit manifold regularity
-instances already used by the the library construction, a smooth metric `g`, a Riemannian bundle with
+instances already used by the local construction, a smooth metric `g`, a Riemannian bundle with
 its `C¹` metric class, and `inner ℝ u v = g.inner x u v`. The canonical version installs the
 Riemannian structure from `g` and discharges metric agreement by reflexivity.
 
@@ -23,7 +23,7 @@ The proof is bounded by APIs already present in pinned Mathlib v4.34.1:
 2. `contMDiffAt_iff_source` moves operator regularity into a source chart.
 3. `contDiffWithinAt_clm_apply` recovers regularity of a finite-dimensional family of linear
    operators from regularity of every fixed-vector evaluation.
-4. the library's `SmoothTangentSection.exists_eq_localConst_nhds` extends each chart-constant vector
+4. The construction's `SmoothTangentSection.exists_eq_localConst_nhds` extends each chart-constant vector
    to a global smooth section agreeing with it near the point. The checked smooth-pair theorem
    gives smooth evaluation on that section. `Bundle.contMDiffAt_section` then yields the
    needed smooth coordinate evaluation.

@@ -53,7 +53,7 @@ def lean_code(text):
 
 
 def main():
-    manifest = json.loads((ROOT / "evidence/construction/source-manifest.json").read_text())
+    manifest = json.loads((ROOT / "evidence/source-manifest.json").read_text())
     for item in manifest["files"]:
         data = (ROOT / item["destination"]).read_bytes()
         assert hashlib.sha256(data).hexdigest() == item["sha256"], item["destination"]

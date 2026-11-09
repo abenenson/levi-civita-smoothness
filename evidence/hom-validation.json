@@ -56,5 +56,6 @@
     ],
     "exact_extracted_files_unchanged": 19
   },
+  "public_evidence_note": "Worker paths in commands, resource receipts, and log metadata are normalized. Hashes refer to the published normalized records; mathematical diagnostics and source bytes are unchanged.",
   "public_record_note": "Worker locations and origin metadata were normalized for publication. These retained records describe historical verification runs; normalization is not a new Lean build."
 }

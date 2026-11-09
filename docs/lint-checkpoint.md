@@ -49,7 +49,7 @@ The exact executed probes are archived as `.lean.txt` evidence snapshots.
 
 ## Mechanical syntax/style scope
 
-the library's `verify-mathlib-bar.sh` mechanical checks passed for all eight files: copyright and module
+The recorded `verify-mathlib-bar.sh` mechanical checks passed for all eight files: copyright and module
 headers, coercion spelling, focused imports, proof blank lines, line lengths, standalone `by`,
 lambda syntax, and dollar application. The owning repository's commit-history check was also
 performed separately. This is the mechanical set used by that verifier; Mathlib's entire

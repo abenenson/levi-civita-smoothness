@@ -2,9 +2,9 @@
   "command": [
     "python3",
     "-B",
-    "/tmp/verification-geometry-full-lint-01/run_lint.py"
+    "/tmp/geometry-verification-full-lint-01/run_lint.py"
   ],
-  "cwd": "/workspace/verification-open-source/levi-civita-smoothness",
+  "cwd": "/workspace/geometry-verification/levi-civita-smoothness",
   "exit_code": 0,
   "reason": "completed",
   "elapsed_seconds": 31.572308116001295,

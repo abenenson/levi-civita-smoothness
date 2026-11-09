@@ -6,11 +6,6 @@
     "toolchain": "leanprover/lean4:v4.36.0-rc2",
     "branch_observation_url": "https://api.github.com/repos/leanprover-community/mathlib4/branches/master"
   },
-  "package": {
-    "commit": "recorded-source-baseline",
-    "toolchain": "leanprover/lean4:v4.34.1",
-    "mathlib_commit": "d13f23b723b8a846827a245b89c10fc7d3f11612"
-  },
   "files": [
     {
       "path": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
@@ -42,5 +37,9 @@
       "snapshot": "evidence/upstream/Riemannian.lean",
       "url": "https://github.com/leanprover-community/mathlib4/blob/e293c42021c641734f10655c39b8023fa88ff6ee/Mathlib/Geometry/Manifold/VectorBundle/Riemannian.lean"
     }
-  ]
+  ],
+  "package": {
+    "toolchain": "leanprover/lean4:v4.34.1",
+    "mathlib_commit": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
 }

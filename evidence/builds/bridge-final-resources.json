@@ -8,7 +8,7 @@
     "+LeviCivitaSmoothness:olean",
     "+MathlibExtensions:olean"
   ],
-  "cwd": "/workspace/verification-open-source/levi-civita-smoothness",
+  "cwd": "/workspace/geometry-verification/levi-civita-smoothness",
   "exit_code": 0,
   "reason": "completed",
   "elapsed_seconds": 9.862719835000007,

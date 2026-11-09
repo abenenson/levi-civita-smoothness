@@ -6,7 +6,7 @@
     "build",
     "+MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistenceTheorem:olean"
   ],
-  "cwd": "/workspace/verification-open-source/levi-civita-smoothness",
+  "cwd": "/workspace/geometry-verification/levi-civita-smoothness",
   "exit_code": 0,
   "reason": "completed",
   "elapsed_seconds": 86.12102106500015,

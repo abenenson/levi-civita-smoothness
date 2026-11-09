@@ -10,7 +10,7 @@
     "+LeviCivitaSmoothness.HomRecovery:olean",
     "+LeviCivitaSmoothness.HomAxiomAudit:olean"
   ],
-  "cwd": "/workspace/verification-open-source/levi-civita-smoothness",
+  "cwd": "/workspace/geometry-verification/levi-civita-smoothness",
   "exit_code": 0,
   "reason": "completed",
   "elapsed_seconds": 22.62128391999977,

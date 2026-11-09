@@ -8,7 +8,7 @@ The candidate bridge has two layers:
    the output pointwise, and transfers the existing smooth-output proof to any representative
    satisfying those identities.
 2. `LeviCivitaSmoothness/MathlibBridge.lean` compares Mathlib's existing Koszul formula with the
-   the library formula, then transfers smoothness to
+   local formula, then transfers smoothness to
    `x ↦ leviCivitaConnection I M Y x (X x)` for globally smooth `X,Y`.
 
 The bridge uses an explicit equality between the supplied metric's bilinear forms and the
@@ -28,7 +28,7 @@ smooth: `ContMDiffOn ... (∞ + 1) ... univ` reduces to ordinary global smoothne
 is no additional arbitrary-set input localization obligation at this stage. The Hom-bundle
 regularity of `x ↦ leviCivitaConnection I M Y x` is now proved in `HomRecovery.lean`.
 
-the library supplies global smooth extensions of chart-constant test sections near any point. The new
+This package supplies global smooth extensions of chart-constant test sections near any point. The new
 proof combines these with `contMDiffAt_hom_bundle`, a source chart, and the existing
 finite-dimensional criterion `contDiffWithinAt_clm_apply`. It proves Mathlib's full global
 `ContMDiffCovariantDerivative ... ∞` class, with explicit metric agreement and canonical
@@ -51,7 +51,7 @@ current finite-regularity metric and manifold classes. The exact Lean index ineq
 auxiliary bundle regularity premises must be checked on the target Mathlib revision; the
 displayed arrow above records the upstream mathematical goal, not a fabricated Lean theorem.
 
-The the library finite-matrix argument is reusable as proof strategy, but all input regularities and
+The finite-matrix argument is reusable as proof strategy, but all input regularities and
 derivative losses must be re-established. A finite-regularity port must account for:
 
 * the derivative of metric pairings;

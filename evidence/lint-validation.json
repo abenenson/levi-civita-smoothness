@@ -46,11 +46,11 @@
         "lean",
         "-j2",
         "--json",
-        "--root=/tmp/verification-geometry-full-lint-01/lint-sources",
-        "/tmp/verification-geometry-full-lint-01/lint-sources/LeviCivitaSmoothness/KoszulTransfer.lean"
+        "--root=/tmp/geometry-verification-full-lint-01/lint-sources",
+        "/tmp/geometry-verification-full-lint-01/lint-sources/LeviCivitaSmoothness/KoszulTransfer.lean"
       ],
       "log": "evidence/full-lint/logs/LeviCivitaSmoothness-KoszulTransfer.lean.log",
-      "log_sha256": "cb4a44cf6ecf54f3c2773ef7c1c2fcebe7348b69a2aa485a42f058182ae41a40",
+      "log_sha256": "c2ddea99f7db5f20bf52c36b9053da6766ce154d73c98169fc59b911e9d4126d",
       "status": "passed",
       "exit_code": 0,
       "environment_linter_count": 16
@@ -66,11 +66,11 @@
         "lean",
         "-j2",
         "--json",
-        "--root=/tmp/verification-geometry-full-lint-01/lint-sources",
-        "/tmp/verification-geometry-full-lint-01/lint-sources/LeviCivitaSmoothness/MathlibBridge.lean"
+        "--root=/tmp/geometry-verification-full-lint-01/lint-sources",
+        "/tmp/geometry-verification-full-lint-01/lint-sources/LeviCivitaSmoothness/MathlibBridge.lean"
       ],
       "log": "evidence/full-lint/logs/LeviCivitaSmoothness-MathlibBridge.lean.log",
-      "log_sha256": "501cafbefba3d7a0f211fda93ffaad66c8815e10870bbd59afb3f30d70ade72c",
+      "log_sha256": "8851d3d47254918c7210be8cda3ed9416b416b5b10a773cbb7a9f64a9d6cc8f9",
       "status": "passed",
       "exit_code": 0,
       "environment_linter_count": 16
@@ -86,11 +86,11 @@
         "lean",
         "-j2",
         "--json",
-        "--root=/tmp/verification-geometry-full-lint-01/lint-sources",
-        "/tmp/verification-geometry-full-lint-01/lint-sources/LeviCivitaSmoothness/MetricApplication.lean"
+        "--root=/tmp/geometry-verification-full-lint-01/lint-sources",
+        "/tmp/geometry-verification-full-lint-01/lint-sources/LeviCivitaSmoothness/MetricApplication.lean"
       ],
       "log": "evidence/full-lint/logs/LeviCivitaSmoothness-MetricApplication.lean.log",
-      "log_sha256": "4fa8049c161d25a82e89f3627f9e9c6f390ccaa80fff4d0cd6efe6d50f9e6b08",
+      "log_sha256": "9c36eba690f3acabbc0eec04f5c5e7a7345192cba63baba516141a92d0d53797",
       "status": "passed",
       "exit_code": 0,
       "environment_linter_count": 16
@@ -106,11 +106,11 @@
         "lean",
         "-j2",
         "--json",
-        "--root=/tmp/verification-geometry-full-lint-01/lint-sources",
-        "/tmp/verification-geometry-full-lint-01/lint-sources/LeviCivitaSmoothness/HomRecovery.lean"
+        "--root=/tmp/geometry-verification-full-lint-01/lint-sources",
+        "/tmp/geometry-verification-full-lint-01/lint-sources/LeviCivitaSmoothness/HomRecovery.lean"
       ],
       "log": "evidence/full-lint/logs/LeviCivitaSmoothness-HomRecovery.lean.log",
-      "log_sha256": "894b6c233fd22b3af81328493e2d04f9857cd23ba9a2b7844bb5f6eba11e62b2",
+      "log_sha256": "902f2f1d9a126abe0775fc1d7cf41860d198755c349874330e94d9a4704df2ec",
       "status": "passed",
       "exit_code": 0,
       "environment_linter_count": 16
@@ -126,11 +126,11 @@
         "lean",
         "-j2",
         "--json",
-        "--root=/tmp/verification-geometry-full-lint-01/lint-sources",
-        "/tmp/verification-geometry-full-lint-01/lint-sources/LeviCivitaSmoothness/AxiomAudit.lean"
+        "--root=/tmp/geometry-verification-full-lint-01/lint-sources",
+        "/tmp/geometry-verification-full-lint-01/lint-sources/LeviCivitaSmoothness/AxiomAudit.lean"
       ],
       "log": "evidence/full-lint/logs/LeviCivitaSmoothness-AxiomAudit.lean.log",
-      "log_sha256": "a63c767f293f49bf31076635c05ee1b36fffa4f516f991693ce85083a4013f95",
+      "log_sha256": "4089b24adddb6ead9f9bd8e985952535bc12504e648c34267b4ee1262c7777d3",
       "status": "passed",
       "exit_code": 0,
       "environment_linter_count": 16
@@ -146,11 +146,11 @@
         "lean",
         "-j2",
         "--json",
-        "--root=/tmp/verification-geometry-full-lint-01/lint-sources",
-        "/tmp/verification-geometry-full-lint-01/lint-sources/LeviCivitaSmoothness/HomAxiomAudit.lean"
+        "--root=/tmp/geometry-verification-full-lint-01/lint-sources",
+        "/tmp/geometry-verification-full-lint-01/lint-sources/LeviCivitaSmoothness/HomAxiomAudit.lean"
       ],
       "log": "evidence/full-lint/logs/LeviCivitaSmoothness-HomAxiomAudit.lean.log",
-      "log_sha256": "4bb42863d51842f25befee3b22a7ebe8bf3b3c77fe9b8c279e9b72704d1fb5f4",
+      "log_sha256": "c4db7e3f96c1de2fe0c6b28d5cb1dfe11d0f7f2dcc60257843c0f775f162821f",
       "status": "passed",
       "exit_code": 0,
       "environment_linter_count": 16
@@ -166,11 +166,11 @@
         "lean",
         "-j2",
         "--json",
-        "--root=/tmp/verification-geometry-full-lint-01/lint-sources",
-        "/tmp/verification-geometry-full-lint-01/lint-sources/LeviCivitaSmoothness.lean"
+        "--root=/tmp/geometry-verification-full-lint-01/lint-sources",
+        "/tmp/geometry-verification-full-lint-01/lint-sources/LeviCivitaSmoothness.lean"
       ],
       "log": "evidence/full-lint/logs/LeviCivitaSmoothness.lean.log",
-      "log_sha256": "89228ba3ac5cd69f2dbc95917e2f38187db157cfb12659814cc0839e3dfdd851",
+      "log_sha256": "1e120bbd1cd315dbdd07f8fc78059b1caf49bc2ecf843d0ee5ffc8cab01cab87",
       "status": "passed",
       "exit_code": 0,
       "environment_linter_count": 16
@@ -186,11 +186,11 @@
         "lean",
         "-j2",
         "--json",
-        "--root=/tmp/verification-geometry-full-lint-01/lint-sources",
-        "/tmp/verification-geometry-full-lint-01/lint-sources/MathlibExtensions.lean"
+        "--root=/tmp/geometry-verification-full-lint-01/lint-sources",
+        "/tmp/geometry-verification-full-lint-01/lint-sources/MathlibExtensions.lean"
       ],
       "log": "evidence/full-lint/logs/MathlibExtensions.lean.log",
-      "log_sha256": "18ef1b7a17504b32ccf4e7c3e6a284727b1d3de2accd07bec450d6011487d67a",
+      "log_sha256": "98d02b8f50c475f586275bf08c298c9b06a3ce1f2fdbcc7454f710180f14e4d1",
       "status": "passed",
       "exit_code": 0,
       "environment_linter_count": 16
@@ -203,7 +203,7 @@
   "mathlib_standard_syntax_set_enabled": false,
   "mechanical_style": {
     "status": "passed",
-    "source_script": "/workspace/the mathematical library/mathematics/lean/scripts/verify-mathlib-bar.sh",
+    "source_script": "/workspace/geometry-verification/scripts/verify-mathlib-bar.sh",
     "source_script_sha256": "4207ca1efc25ae3ba509441f41b0493db07cfa6d3493a6ce5c48f87fac677443",
     "log": "evidence/builds/mechanical-style.log",
     "log_sha256": "8b337ea115d080fd87bbc0ce1fd26273012341f521f02fc5c550a2a1e07a8e5b",
@@ -225,7 +225,7 @@
   "probe_generator_sha256": "65d086e17bb6125d20fed49b280f2d6e331d246cdbe2a61130bda3afc287c3a8",
   "guarded_run_command": [
     "python",
-    "/workspace/verification-open-source/tools/release-task-guard.py",
+    "/workspace/geometry-verification/tools/release-task-guard.py",
     "--phase",
     "sprint-geometry-full-lint-01",
     "--seconds",
@@ -233,7 +233,8 @@
     "--",
     "python3",
     "-B",
-    "/tmp/verification-geometry-full-lint-01/run_lint.py"
+    "/tmp/geometry-verification-full-lint-01/run_lint.py"
   ],
+  "public_evidence_note": "Worker paths in commands, resource receipts, and log metadata are normalized. Hashes refer to the published normalized records; mathematical diagnostics and source bytes are unchanged.",
   "public_record_note": "Worker locations and origin metadata were normalized for publication. These retained records describe historical verification runs; normalization is not a new Lean build."
 }

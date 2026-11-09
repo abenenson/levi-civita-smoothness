@@ -2,7 +2,6 @@
 
 ## Pinned sources
 
-* the library: `recorded-source-baseline`.
 * Mathlib package base: `d13f23b723b8a846827a245b89c10fc7d3f11612` (v4.34.1).
 * Mathlib master observation: `e293c42021c641734f10655c39b8023fa88ff6ee` (2026-11-06).
 
@@ -12,7 +11,7 @@ cone compiles on current master.
 
 ## Types and premises
 
-| Aspect | the library | Mathlib current master |
+| Aspect | local construction | Mathlib current master |
 | --- | --- | --- |
 | Connection type | `SmoothTangentConnection` | `CovariantDerivative I E (TangentSpace I)` |
 | Underlying operation | `Γ∞ → Γ∞ → Γ∞` | `(Π x, TM x) → Π x, TM x →L[ℝ] TM x` |
@@ -24,10 +23,10 @@ cone compiles on current master.
 | Output | Global smooth section for every pair of global smooth inputs | Chosen covariant derivative; no regularity instance in inspected file |
 | Uniqueness | Equality of smooth output sections | Equality at `x` on sections differentiable at `x`; arbitrary tangent direction |
 
-`∞` denotes smoothness, whereas `ω = ⊤` denotes analyticity in the `ℕ∞ω` index. the library's local
+`∞` denotes smoothness, whereas `ω = ⊤` denotes analyticity in the `ℕ∞ω` index. The local
 notation `n∞` is `(∞ : WithTop ℕ∞)`, not the top element.
 
-the library's strongest existence statement in the cone is
+The construction's strongest existence statement in the cone is
 `SmoothTangentSection.exists_leviCivitaTangentConnectionFromMetric`. Its output is a
 `SmoothTangentConnection` satisfying `IsTorsionFree` and
 `IsMetricCompatibleFromMetric`. Smoothness comes from the codomain `Γ∞` of `covDeriv`, not
@@ -41,7 +40,7 @@ against a fixed global smooth vector field.
 
 ## Formula agreement
 
-the library writes twice the inner product as
+The local construction writes twice the inner product as
 
 ```
 X⟪Y,Z⟫ + Y⟪Z,X⟫ - Z⟪X,Y⟫
@@ -71,12 +70,12 @@ CovariantDerivative.leviCivitaConnection I M (fun x => Y x) x (X x)
 for bundled global smooth `X,Y`, with Mathlib's Riemannian bundle instantiated from `g`.
 It is proved in `LeviCivitaSmoothness/MathlibBridge.lean`; the canonical metric application is
 checked in `LeviCivitaSmoothness/MetricApplication.lean`. Both use the pinned v4.34.1 package.
-Pairing against global smooth test sections determines a tangent vector: the library's
+Pairing against global smooth test sections determines a tangent vector: the local construction's
 `SmoothTangentSection.exists_eq_at` supplies a test section with any prescribed value, without
 requiring `SigmaCompactSpace M`. This avoids assuming that global differentiable and smooth
 sections are the same test class.
 
-## Proof architecture in the library
+## Proof architecture
 
 1. Package the Koszul expression as a smooth scalar function and prove smooth-function
    linearity in the test section.
@@ -94,7 +93,7 @@ smoothness proof only needs finitely many frame sections and takes the finite in
 of their neighborhoods; an upstream port must preserve that distinction.
 
 This is a different smoothness route from upstream's pointwise tensoriality/musical-isomorphism
-construction. The checked bridge identifies the two outputs and transfers the library's smoothness
+construction. The checked bridge identifies the two outputs and transfers the local construction's smoothness
 of evaluation on global smooth pairs. The subsequent checked `HomRecovery.lean` module recovers
 the full Hom-valued regularity class at index `∞`, under the same smooth-metric hypotheses.
 
@@ -105,21 +104,21 @@ the full Hom-valued regularity class at index `∞`, under the same smooth-metri
   sections. Open PR [#43042](https://github.com/leanprover-community/mathlib4/pull/43042)
   develops the more general `ContMDiff.clm_bundle_of_apply` criterion; coordinate further
   generalizations with that work.
-* Localize the inputs. the library's solver consumes globally smooth sections. A pointwise smoothness
+* Localize the inputs. The local solver consumes globally smooth sections. A pointwise smoothness
   argument must extend sections agreeing on a neighborhood, rather than assert that every
   locally smooth section is globally smooth. Existing bump-function tools can support this,
   but the corresponding connection-germ bridge must be stated and checked. This is needed
   for the stronger arbitrary-set/local-input theorem. The proved global `C^∞` regularity class
   uses global smooth test sections obtained from local chart constants.
 * Track finite derivative loss. The advertised upstream goal is a `C^(n+2)` manifold and
-  `C^(n+1)` metric yielding a `C^n` connection. Replacing every `∞` in the library by `n` is invalid:
+  `C^(n+1)` metric yielding a `C^n` connection. Replacing every `∞` in the construction by `n` is invalid:
   differentiating metric pairings and taking Lie brackets each costs derivatives, and the
   tangent bundle itself costs one derivative of the manifold atlas.
 * Prove the correct local-set formulation. Smoothness at a point with index `∞` does not in
   general imply one neighborhood on which the function is smooth. PR #43042 explicitly uses
   `∀ᶠ b in 𝓝 x, ContMDiffAt ... b` for this reason.
 * Port and check on the current toolchain in an isolated Mathlib checkout before offering any
-  candidate as a current-master patch. No the library or shared cache toolchain changes are required.
+  candidate as a current-master patch. The supported toolchain remains unchanged.
 
 ## Existing upstream activity
 

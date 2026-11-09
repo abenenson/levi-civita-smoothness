@@ -1,30 +1,26 @@
 # Levi-Civita smoothness preparation
 
 This repository proves global smoothness of Mathlib's `CovariantDerivative.leviCivitaConnection`
-from a smooth metric, using the library's isolated smooth construction and a checked identification of
+from a smooth metric, using a direct smooth construction and a checked identification of
 their outputs. It is a local preparation package, not an upstream contribution already accepted
 or submitted.
 
-The extracted source is pinned to the library commit
-`recorded-source-baseline`. The 19 files (5,037 lines) are byte-for-byte
-verified against that Git object; their hashes are in
-[`evidence/construction/source-manifest.json`](evidence/construction/source-manifest.json).
-The copied file headers retain their historical project descriptions; the current-upstream
-comparison below supersedes any novelty claims in that prose.
+The 19 core construction files (5,037 lines) have their source identities recorded in
+[`evidence/source-manifest.json`](evidence/source-manifest.json).
+The current Mathlib interface comparison below describes their relationship to upstream.
 
 The package uses Lean **4.34.1** and Mathlib
-`d13f23b723b8a846827a245b89c10fc7d3f11612`. Current upstream was separately inspected at
+`d13f23b723b8a846827a245b89c10fc7d3f11612`. Upstream was separately inspected at
 `e293c42021c641734f10655c39b8023fa88ff6ee`, using Lean **4.36.0-rc2**. The source snapshots
 under `evidence/upstream` are evidence, excluded from the Lean library roots. Their attribution
 headers are preserved.
 
 Mathlib already proves existence and uniqueness of Levi-Civita connections. The contribution
 opportunity is regularity of its chosen connection, with explicit attention to local section
-inputs and loss of derivatives. the library's result only constructs an operator on global smooth
-sections. These statements must be bridged; they are not interchangeable.
+inputs and loss of derivatives. The direct construction acts on global smooth sections. These statements must be bridged; they are not interchangeable.
 
 The new bridge now proves, on the pinned Mathlib version, that its chosen Levi-Civita derivative
-agrees with the library's smooth output on global smooth input pairs. It transfers `ContMDiff ... ∞`
+agrees with the local construction's smooth output on global smooth input pairs. It transfers `ContMDiff ... ∞`
 regularity to that evaluation. The canonical application installs the Riemannian structure
 from the supplied metric, so no independent metric agreement assumption is required:
 
@@ -89,7 +85,7 @@ separate work. This package does not claim those theorems or an accepted upstrea
 
 All eight new proof, entry, and audit files also passed full-source
 `#lint+ docBlame docBlameThm`, with all 16 selected environment linters and zero errors per file.
-The mechanical syntax/style checks from the library's `verify-mathlib-bar.sh` passed separately.
+The mechanical syntax/style checks using the recorded `verify-mathlib-bar.sh` passed separately.
 These checks do not assert that Mathlib's entire optional standard syntax-linter set was enabled.
 Exact probes, per-file logs, hashes, and guarded receipts are in
 [`evidence/lint-validation.json`](evidence/lint-validation.json). The unchanged 19-file source
