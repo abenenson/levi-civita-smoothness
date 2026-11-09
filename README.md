@@ -74,10 +74,15 @@ strict proof checks with:
 
 ```sh
 python3 scripts/verify_evidence.py
+python3 -m unittest discover -s scripts -p 'test_*.py'
 lake --rehash --wfail build +MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistenceTheorem:olean
 lake --rehash --wfail build +LeviCivitaSmoothness.AxiomAudit:olean +LeviCivitaSmoothness:olean +MathlibExtensions:olean
 lake --rehash --wfail build +LeviCivitaSmoothness.HomRecovery:olean +LeviCivitaSmoothness.HomAxiomAudit:olean
 ```
+
+The offline evidence checker requires all three validation receipts and checks their source,
+build-log, and lint-probe hashes. The regression checks exercise missing receipts and source
+changes in isolated copies without invoking Lean or accessing the network.
 
 Finite derivative loss, arbitrary-set local input regularity, and a current-master port remain
 separate work. This package does not claim those theorems or an accepted upstream contribution.

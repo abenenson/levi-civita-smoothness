@@ -75,8 +75,8 @@ def main():
     assert (ROOT / "lean-toolchain").read_text().strip() == provenance["package"]["toolchain"]
     for name in ["validation.json", "hom-validation.json", "lint-validation.json"]:
         validation_path = ROOT / "evidence" / name
-        if not validation_path.exists():
-            continue
+        if not validation_path.is_file():
+            raise FileNotFoundError(f"Required validation receipt missing: evidence/{name}")
         validation = json.loads(validation_path.read_text())
         for path, expected in validation["new_proof_source_hashes"].items():
             assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == expected, path
