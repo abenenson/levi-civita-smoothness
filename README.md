@@ -1,8 +1,8 @@
 # Levi-Civita smoothness preparation
 
 This repository proves global smoothness of Mathlib's `CovariantDerivative.leviCivitaConnection`
-from a smooth metric, using a direct smooth construction and a checked identification of
-their outputs. It is a local preparation package, not an upstream contribution already accepted
+from a smooth metric. A direct Koszul construction is identified with Mathlib's chosen derivative
+to transfer smoothness. It is a local preparation package, not an upstream contribution already accepted
 or submitted.
 
 The 19 core construction files (5,037 lines) have their source identities recorded in
@@ -17,7 +17,8 @@ headers are preserved.
 
 Mathlib already proves existence and uniqueness of Levi-Civita connections. The contribution
 opportunity is regularity of its chosen connection, with explicit attention to local section
-inputs and loss of derivatives. The direct construction acts on global smooth sections. These statements must be bridged; they are not interchangeable.
+inputs and loss of derivatives. The direct construction acts on global smooth sections. These statements must be bridged;
+they are not interchangeable.
 
 The new bridge now proves, on the pinned Mathlib version, that its chosen Levi-Civita derivative
 agrees with the local construction's smooth output on global smooth input pairs. It transfers `ContMDiff ... ∞`
@@ -60,7 +61,7 @@ The audited source existence and bridge theorems depend only on `propext`, `Clas
 and `Quot.sound`; no new axioms or placeholders are introduced.
 
 The original [`evidence/validation.json`](evidence/validation.json) records the baseline
-commit `d9da9f6`, which established smooth-pair evaluation. The additional
+commit the earlier checkpoint, which established smooth-pair evaluation. The additional
 [`evidence/hom-validation.json`](evidence/hom-validation.json) records the successful full
 global `C^∞` connection-class proof and its three axiom probes, again using only the same three
 standard axioms. The later [documentation and lint checkpoint](docs/lint-checkpoint.md) adds

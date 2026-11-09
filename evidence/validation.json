@@ -61,7 +61,6 @@
     "LeviCivitaSmoothness.lean": "413d36611dc836bf02d2c9d61c9fa52e7d47d451bf75b897072d649a288c6c8a"
   },
   "documentation_refresh": {
-    "parent_commit": "270e6d9aca7dd1860d6cbdca7f306e489bf482dd",
     "proof_files_unchanged_except_added_copyright_headers_and_theorem_docstring": [
       "LeviCivitaSmoothness/KoszulTransfer.lean",
       "LeviCivitaSmoothness/MathlibBridge.lean",

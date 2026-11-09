@@ -1,6 +1,5 @@
 {
   "observed_date": "2026-11-06",
-  "parent_commit": "270e6d9aca7dd1860d6cbdca7f306e489bf482dd",
   "toolchain": "leanprover/lean4:v4.34.1",
   "mathlib_commit": "d13f23b723b8a846827a245b89c10fc7d3f11612",
   "strict_builds_passed": true,
@@ -210,7 +209,6 @@
     "owning_repository_history_check": "passed separately"
   },
   "proof_preservation": {
-    "parent_commit": "270e6d9aca7dd1860d6cbdca7f306e489bf482dd",
     "proof_files": [
       "LeviCivitaSmoothness/KoszulTransfer.lean",
       "LeviCivitaSmoothness/MathlibBridge.lean",

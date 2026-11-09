@@ -1,6 +1,6 @@
 # Bounded global smoothness step
 
-The branch `hom-bundle-recovery` starts at the validated commit `d9da9f6`. Its mathematical
+The branch `hom-bundle-recovery` starts at the validated commit the earlier checkpoint. Its mathematical
 Hom-recovery step preserved the earlier proof sources. The subsequent documentation/lint
 checkpoint adds headers and theorem documentation while preserving every mathematical proof.
 

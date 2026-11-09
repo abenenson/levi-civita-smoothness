@@ -1,6 +1,6 @@
 # Documentation and full-source lint checkpoint
 
-This checkpoint starts at `270e6d9`. The mathematical proofs are unchanged. For each of
+This checkpoint starts at the earlier checkpoint. The mathematical proofs are unchanged. For each of
 `KoszulTransfer.lean`, `MathlibBridge.lean`, `MetricApplication.lean`, and `HomRecovery.lean`,
 removing the newly added copyright header and, in `MathlibBridge.lean`, the new theorem
 docstring reproduces the previous file byte for byte. Every one of the original 19 extracted
