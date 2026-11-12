@@ -1,5 +1,7 @@
 # Levi-Civita smoothness preparation
 
+[![Lean verification](https://github.com/abenenson/levi-civita-smoothness/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/abenenson/levi-civita-smoothness/actions/workflows/lean.yml)
+
 This repository proves global smoothness of Mathlib's `CovariantDerivative.leviCivitaConnection`
 from a smooth metric. A direct Koszul construction is identified with Mathlib's chosen derivative
 to transfer smoothness. It is a local preparation package, not an upstream contribution already accepted
@@ -83,6 +85,24 @@ lake --rehash --wfail build +LeviCivitaSmoothness.HomRecovery:olean +LeviCivitaS
 The offline evidence checker requires all three validation receipts and checks their source,
 build-log, and lint-probe hashes. The regression checks exercise missing receipts and source
 changes in isolated copies without invoking Lean or accessing the network.
+
+GitHub Actions repeats the offline checks, strict builds of **all 27 authored modules**
+(the 19 construction files and eight new files), and the eight full-source lint probes on
+the existing Lean 4.34.1 / Mathlib pin. It also checks all five original and three Hom-recovery
+axiom reports against the three standard axioms above. To repeat these live checks locally:
+
+```sh
+python3 scripts/verify_live.py --cache
+python3 scripts/verify_live.py
+```
+
+The cache step fetches only the transitive Mathlib imports needed by the authored sources
+and lint probes, to limit hosted runner disk use. The live lint checks reconstruct the same
+source wrappers as the archived probes, require clean JSON diagnostics and all 16 linters,
+and re-elaborate each complete source under its original module identity. CI uses at most two
+Lean threads per process. Live logs are retained as the `lean-verification-evidence` Actions
+artifact for 14 days, separately from the historical receipts under `evidence/`; those receipts
+remain records of their original verification runs.
 
 Finite derivative loss, arbitrary-set local input regularity, and a current-master port remain
 separate work. This package does not claim those theorems or an accepted upstream contribution.
