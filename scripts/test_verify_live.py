@@ -57,6 +57,15 @@ class LiveDiagnosticsTests(unittest.TestCase):
         with self.assertRaises(json.JSONDecodeError):
             verify_live.check_diagnostics("not JSON", verify_live.ROOT / "MathlibExtensions.lean")
 
+    def test_cache_arguments_are_module_names(self):
+        command = verify_live.cache_command()
+        self.assertEqual(command[:4], ["lake", "exe", "cache", "get"])
+        self.assertEqual(command[4:], verify_live.cache_imports())
+        self.assertIn("Mathlib.Algebra.BigOperators.Pi", command[4:])
+        self.assertIn(verify_live.LINT_IMPORT, command[4:])
+        self.assertTrue(all(module.startswith("Mathlib.") and "/" not in module
+                            and not module.endswith(".lean") for module in command[4:]))
+
     def test_every_manifest_and_lint_source_is_a_strict_target(self):
         manifest = json.loads((verify_live.ROOT / "evidence/source-manifest.json").read_text())
         expected = {item["destination"] for item in manifest["files"]}
