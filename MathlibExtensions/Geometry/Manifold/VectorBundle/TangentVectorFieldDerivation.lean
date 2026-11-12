@@ -26,8 +26,8 @@ This module implements the forward bridge:
 derivative.*
 
 We do **not** attempt the inverse direction (derivation ⇒ geometric vector field); that requires
-additional locality/smoothness structure on algebraic derivations and is tracked separately in
-Beads.
+additional locality/smoothness structure on algebraic derivations. The inverse direction is
+outside this package's scope.
 -/
 
 open scoped Manifold ContDiff
