@@ -55,6 +55,11 @@ def cache_imports():
     return sorted(modules)
 
 
+def cache_command():
+    """Resolve focused imports through Lake's module search path."""
+    return ["lake", "exe", "cache", "get", *cache_imports()]
+
+
 def check_diagnostics(output, source):
     messages = [json.loads(line) for line in output.splitlines() if line.strip()]
     assert messages, f"No Lean diagnostics: {source}"
@@ -116,9 +121,7 @@ if __name__ == "__main__":
                         help="fetch only the Mathlib import closure needed by these checks")
     args = parser.parse_args()
     if args.cache:
-        # Mathlib's cache tool accepts source paths and adds their transitive imports.
-        subprocess.run(["lake", "exe", "cache", "get",
-                        *(module.replace(".", "/") + ".lean" for module in cache_imports())],
-                       cwd=ROOT, check=True)
+        # Module names resolve inside the pinned Mathlib package through Lake's search path.
+        subprocess.run(cache_command(), cwd=ROOT, check=True)
     else:
         verify()
