@@ -16,10 +16,11 @@ inner products of the scoped `RiemannianBundle` instance. This prevents a hidden
 metrics. `MetricApplication.lean` installs the bundle from the supplied metric and discharges
 that premise by reflexivity; this application has passed the strict build and axiom audit.
 
-This is a local candidate on Mathlib v4.34.1. It is not yet a current-master patch and must not
-be advertised as the finite-regularity smoothness theorem. The exact extracted proof cone and
-the new bridge passed separate strict builds on qualified Lean 4.34.1. The axiom audit reports
-only `propext`, `Classical.choice`, and `Quot.sound`.
+The supported package uses Lean and Mathlib v4.35.0, with exact dependency pins
+recorded in the package configuration. It is not a current-master patch or the
+finite-regularity smoothness theorem. The earlier Lean 4.34.1 strict-build and
+three-standard-axiom receipts remain historical checkpoints; current verification
+uses the public live verifier described in the README.
 
 ## Proved next step: global smooth connection class
 
@@ -61,13 +62,13 @@ derivative losses must be re-established. A finite-regularity port must account 
 * section regularity on sets when proving the local `...On` statement;
 * connection locality when replacing local sections by suitable extensions.
 
-The original 19-file proof cone is evidence and a reusable baseline. It is too large and
+The 19 maintained support files preserve a reusable public API. The full construction is too large and
 project-specific to propose wholesale as an upstream PR. Replace its auxiliary local-frame,
 tensoriality, derivation, and metric APIs with upstream APIs before proposing a small patch.
 
 ## Public contribution gate
 
-No issue, PR, maintainer message, or public push has been made. A reviewable upstream patch
+No upstream issue, PR, or maintainer message has been created from this package. A reviewable upstream patch
 would need a separately pinned current-master checkout, clean kernel checks, an explicit
 review of overlap with the active Riemannian geometry project, and a description limited to
 the theorem actually proved. The present package supplies the source evidence and the

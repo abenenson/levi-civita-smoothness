@@ -2,16 +2,20 @@
 
 ## Pinned sources
 
-* Mathlib package base: `d13f23b723b8a846827a245b89c10fc7d3f11612` (v4.34.1).
+* Current Mathlib package base: `56a005855ea17e0b0958f73ec801ae140b0a1679` (v4.35.0).
+* Historical package base: `d13f23b723b8a846827a245b89c10fc7d3f11612` (v4.34.1).
 * Mathlib master observation: `e293c42021c641734f10655c39b8023fa88ff6ee` (2026-11-06).
 
-The inspected current-master `LeviCivita.lean` differs from v4.34.1 only in imports and
-whitespace. This is evidence of a stable bridge target, not evidence that the entire dependency
-cone compiles on current master.
+The pinned v4.35.0 `LeviCivita.lean` supplies existence, uniqueness, and the Koszul
+formula; its header still leaves connection regularity to future work. Its `Hom.lean`
+supplies `contMDiffAt_hom_bundle` and forward `clm_bundle_apply`, while the reverse
+`clm_bundle_of_apply` criterion is absent. Upstream PR #43042 remained open when
+checked on 2026-11-14. The older master observation and archived source snapshots
+remain historical evidence; the package does not claim a current-master port.
 
 ## Types and premises
 
-| Aspect | local construction | Mathlib current master |
+| Aspect | local construction | Mathlib v4.35.0 |
 | --- | --- | --- |
 | Connection type | `SmoothTangentConnection` | `CovariantDerivative I E (TangentSpace I)` |
 | Underlying operation | `Γ∞ → Γ∞ → Γ∞` | `(Π x, TM x) → Π x, TM x →L[ℝ] TM x` |
@@ -69,7 +73,7 @@ CovariantDerivative.leviCivitaConnection I M (fun x => Y x) x (X x)
 
 for bundled global smooth `X,Y`, with Mathlib's Riemannian bundle instantiated from `g`.
 It is proved in `LeviCivitaSmoothness/MathlibBridge.lean`; the canonical metric application is
-checked in `LeviCivitaSmoothness/MetricApplication.lean`. Both use the pinned v4.34.1 package.
+checked in `LeviCivitaSmoothness/MetricApplication.lean`. Both use the pinned v4.35.0 package.
 Pairing against global smooth test sections determines a tangent vector: the local construction's
 `SmoothTangentSection.exists_eq_at` supplies a test section with any prescribed value, without
 requiring `SigmaCompactSpace M`. This avoids assuming that global differentiable and smooth
@@ -118,7 +122,7 @@ the full Hom-valued regularity class at index `∞`, under the same smooth-metri
   general imply one neighborhood on which the function is smooth. PR #43042 explicitly uses
   `∀ᶠ b in 𝓝 x, ContMDiffAt ... b` for this reason.
 * Port and check on the current toolchain in an isolated Mathlib checkout before offering any
-  candidate as a current-master patch. The supported toolchain remains unchanged.
+  candidate as a current-master patch. The supported toolchain is Lean 4.35.0 with the stable Mathlib pin above.
 
 ## Existing upstream activity
 
