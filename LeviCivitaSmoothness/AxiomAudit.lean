@@ -3,8 +3,12 @@ Copyright (c) 2026 Adam Benenson. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
-import LeviCivitaSmoothness.MetricApplication
-import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistenceTheorem
+module
+
+public import LeviCivitaSmoothness.MetricApplication
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistenceTheorem
+
+@[expose] public section
 
 /-! # Transitive axiom checks for the original construction and smooth-pair bridge -/
 

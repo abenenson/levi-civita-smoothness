@@ -3,12 +3,16 @@ Copyright (c) 2026 Adam Benenson. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
-import Mathlib.Geometry.Manifold.VectorBundle.Tangent
-import Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorField.LieBracket
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionDerivation
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionLieBracket
+public import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+public import Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection
+
+public import MathlibExtensions.Geometry.Manifold.VectorField.LieBracket
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionDerivation
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionLieBracket
+
+@[expose] public section
 
 /-!
 # Lie bracket Leibniz rules for smooth tangent sections

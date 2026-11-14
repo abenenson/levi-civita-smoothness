@@ -1,8 +1,12 @@
-import Mathlib.Geometry.Manifold.VectorField.LieBracket
-import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorBundle.RiemannianTangentInnerCInfinity
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentConnection
+public import Mathlib.Geometry.Manifold.VectorField.LieBracket
+public import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.RiemannianTangentInnerCInfinity
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentConnection
+
+@[expose] public section
 
 /-!
 # Levi–Civita uniqueness for `SmoothTangentConnection` (Koszul)

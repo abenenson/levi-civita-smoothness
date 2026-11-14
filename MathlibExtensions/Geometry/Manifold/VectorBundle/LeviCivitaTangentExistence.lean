@@ -4,16 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
 
-import Mathlib.Geometry.Manifold.VectorField.LieBracket
-import Mathlib.Geometry.Manifold.VectorBundle.Tangent
-import Mathlib.LinearAlgebra.BilinearForm.Properties
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorBundle.RiemannianTangentInnerCInfinity
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentLieBracket
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionLieBracket
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionCInfinityLinearAtPoint
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionDerivation
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSpaceFiniteDimensional
+public import Mathlib.Geometry.Manifold.VectorField.LieBracket
+public import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+public import Mathlib.LinearAlgebra.BilinearForm.Properties
+
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.RiemannianTangentInnerCInfinity
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentLieBracket
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionLieBracket
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionCInfinityLinearAtPoint
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionDerivation
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSpaceFiniteDimensional
+
+@[expose] public section
 
 /-!
 # Levi–Civita existence (workbench)

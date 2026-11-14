@@ -3,10 +3,14 @@ Copyright (c) 2026 Adam Benenson. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
-import Mathlib.Geometry.Manifold.MFDeriv.FDeriv
-import Mathlib.Geometry.Manifold.VectorField.LieBracket
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorField.Pullback
+public import Mathlib.Geometry.Manifold.MFDeriv.FDeriv
+public import Mathlib.Geometry.Manifold.VectorField.LieBracket
+
+public import MathlibExtensions.Geometry.Manifold.VectorField.Pullback
+
+@[expose] public section
 
 /-!
 # Extra lemmas for manifold vector-field Lie brackets

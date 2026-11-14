@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
 
-import Mathlib.Geometry.Manifold.VectorBundle.Tangent
-import Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorBundle.Connection
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentVectorFieldDerivation
+public import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+public import Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection
+
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.Connection
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentVectorFieldDerivation
+
+@[expose] public section
 
 /-!
 # Tangent sections as derivations of `C^∞(M)`

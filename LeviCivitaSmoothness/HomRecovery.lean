@@ -3,8 +3,13 @@ Copyright (c) 2026 Adam Benenson. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
-import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
-import LeviCivitaSmoothness.MetricApplication
+module
+
+public import Mathlib.Geometry.Manifold.VectorBundle.Hom
+public import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
+public import LeviCivitaSmoothness.MetricApplication
+
+@[expose] public section
 
 /-!
 # Global smoothness of the Levi-Civita covariant derivative

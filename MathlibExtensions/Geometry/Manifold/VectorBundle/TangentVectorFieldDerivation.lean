@@ -1,10 +1,14 @@
 /-
 Copyright (c) 2026 Adam Benenson. All rights reserved.
 -/
-import Mathlib.Geometry.Manifold.Algebra.SmoothFunctions
-import Mathlib.Geometry.Manifold.ContMDiffMFDeriv
-import Mathlib.Geometry.Manifold.VectorBundle.Tangent
-import Mathlib.RingTheory.Derivation.Lie
+module
+
+public import Mathlib.Geometry.Manifold.Algebra.SmoothFunctions
+public import Mathlib.Geometry.Manifold.ContMDiffMFDeriv
+public import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+public import Mathlib.RingTheory.Derivation.Lie
+
+@[expose] public section
 
 /-!
 # `MathlibExtensions.Geometry.Manifold.VectorBundle.TangentVectorFieldDerivation`

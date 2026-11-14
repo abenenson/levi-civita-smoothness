@@ -3,8 +3,12 @@ Copyright (c) 2026 Adam Benenson. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
-import Mathlib.Geometry.Manifold.VectorBundle.CovariantDerivative.LeviCivita
-import LeviCivitaSmoothness.KoszulTransfer
+module
+
+public import Mathlib.Geometry.Manifold.VectorBundle.CovariantDerivative.LeviCivita
+public import LeviCivitaSmoothness.KoszulTransfer
+
+@[expose] public section
 
 /-!
 # Identifying Mathlib's Levi-Civita derivative on global smooth pairs

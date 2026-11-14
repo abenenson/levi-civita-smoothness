@@ -3,8 +3,12 @@ Copyright (c) 2026 Adam Benenson. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
-import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentConnectionFromMetric
-import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentUniqueness
+module
+
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentConnectionFromMetric
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentUniqueness
+
+@[expose] public section
 
 /-!
 # Levi–Civita existence theorem (tangent-connection interface)
