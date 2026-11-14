@@ -2,6 +2,7 @@ name: Lean verification
 
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -14,6 +15,7 @@ jobs:
     timeout-minutes: 45
     env:
       LEAN_NUM_THREADS: 2
+      MATHLIB_NO_CACHE_ON_UPDATE: 1
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
