@@ -6,6 +6,7 @@ import json
 import re
 import subprocess
 import sys
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -344,12 +345,24 @@ def main():
     initial = input_binding(root, config)
     assert config['audit_imports'] == AUDIT_IMPORTS, 'Use advertised roots and opt-in example'
     assert (root / 'lean-toolchain').read_text().strip() == 'leanprover/lean4:v4.35.0'
-    dependencies = dependency_binding(root, config)
     if args.cache:
-        subprocess.run(cache_command(root), cwd=root, check=True)
+        # Lake materializes manifest-locked worktrees before their actual pins can be checked.
+        # Suppress Mathlib's automatic unscoped cache fetch during dependency setup.
+        environment = dict(os.environ, MATHLIB_NO_CACHE_ON_UPDATE='1')
+        bootstrap = subprocess.run(['lake', 'env', 'lean', '--version'], cwd=root,
+                                   env=environment, text=True, stdout=subprocess.PIPE,
+                                   stderr=subprocess.STDOUT)
+        print(bootstrap.stdout, end='', flush=True)
+        assert bootstrap.returncode == 0, 'Locked dependency bootstrap failed'
+        check_diagnostics(bootstrap.stdout)
+        assert 'version 4.35.0,' in bootstrap.stdout, 'Wrong Lean compiler version'
+        assert input_binding(root, config) == initial, 'Inputs changed during dependency bootstrap'
+        dependencies = dependency_binding(root, config)
+        subprocess.run(cache_command(root), cwd=root, env=environment, check=True)
         assert input_binding(root, config) == initial, 'Inputs changed during cache fetch'
         assert dependency_binding(root, config) == dependencies, 'Dependencies changed'
         return
+    dependencies = dependency_binding(root, config)
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     evidence = (args.evidence_dir or root / 'verification-artifacts' / stamp).resolve()
     evidence.mkdir(parents=True, exist_ok=False)
