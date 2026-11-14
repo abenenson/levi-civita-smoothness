@@ -3,10 +3,15 @@ Copyright (c) 2026 Adam Benenson. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
-import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorBundle.Connection
-import MathlibExtensions.Geometry.Manifold.VectorBundle.RiemannianTangentBundle
+public import Mathlib.Geometry.Manifold.VectorBundle.Hom
+public import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.Connection
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.RiemannianTangentBundle
+
+@[expose] public section
 
 /-!
 # Smooth inner product on tangent-bundle sections (from metric data)

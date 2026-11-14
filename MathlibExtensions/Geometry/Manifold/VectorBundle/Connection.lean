@@ -3,40 +3,42 @@ Copyright (c) 2026 Adam Benenson. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
-import Mathlib.Geometry.Manifold.DerivationBundle
-import Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection
-import Mathlib.RingTheory.Derivation.Lie
+module
+
+public import Mathlib.Geometry.Manifold.DerivationBundle
+public import Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection
+public import Mathlib.RingTheory.Derivation.Lie
+
+@[expose] public section
 
 /-!
 # `MathlibExtensions.Geometry.Manifold.VectorBundle.Connection`
 
-Mathlib (at the current pin) provides smooth sections of vector bundles (`ContMDiffSection`) and an
-algebraic theory of smooth-function derivations (`DerivationBundle`), but does not yet expose a
-bundle-connection interface suitable for defining curvature and Bianchi identities on manifolds.
+Mathlib provides the `CovariantDerivative` interface for connections on vector bundles.
+This module retains the smooth-section and derivation interface used by the direct smooth
+Koszul construction. The `LeviCivitaSmoothness` bridge identifies that construction with
+Mathlib's chosen Levi-Civita covariant derivative on global smooth inputs.
 
-This module introduces a **mathlib-only, upstreamable** interface for a smooth connection on a
-vector bundle, phrased in terms of derivations of the commutative ring `C^∞(M; 𝕜)`:
+The retained interface is phrased in terms of derivations of the commutative ring `C^∞(M; 𝕜)`:
 
 - we first equip smooth sections with a natural scalar action by smooth functions, and
 - then define a connection as an operator `∇ₓ s` satisfying `C^∞`-linearity in `x` and the
   Leibniz rule in `s`.
 
-This is an intentionally conservative starting point: it provides the right axioms for curvature
-as a measure of non-representation (`[∇ₓ, ∇ᵧ] - ∇_[x,y]`) without committing to a specific geometric
-construction (e.g. Levi–Civita).
+The operator satisfies the usual connection axioms. This support module itself does not
+construct a metric connection or prove curvature identities.
 
 ## Main definitions
 
-- `MathlibExtensions.Geometry.Manifold.VectorBundle.SmoothSection`:
-  smooth sections `Cₛ^∞⟮I; F, V⟯` (alias).
-- `MathlibExtensions.Geometry.Manifold.VectorBundle.SmoothFunction`:
-  smooth scalar functions `C^∞⟮I, M; 𝕜⟯` (alias).
 - `MathlibExtensions.Geometry.Manifold.VectorBundle.SmoothVectorField`:
   derivations of smooth functions, `Derivation 𝕜 C^∞ C^∞` (alias).
 - `MathlibExtensions.Geometry.Manifold.VectorBundle.SmoothConnection`:
   a smooth vector bundle connection `∇`.
 
 ## Notes
+
+The local notations `Γ∞` and `C∞` abbreviate smooth sections and smooth scalar functions;
+they do not introduce additional exported declarations.
 
 For finite-dimensional smooth real manifolds, derivations of `C^∞(M)` coincide with classical
 smooth vector fields. We keep this file purely algebraic (derivation-based); any equivalence layer

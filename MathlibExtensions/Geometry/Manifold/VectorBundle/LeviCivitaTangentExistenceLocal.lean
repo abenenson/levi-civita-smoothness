@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
 
-import Mathlib.Geometry.Manifold.Algebra.LieGroup
-import Mathlib.LinearAlgebra.Matrix.Adjugate
-import Mathlib.LinearAlgebra.Matrix.BilinearForm
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistence
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionLocalDecomposition
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionPrescribedValue
+public import Mathlib.Geometry.Manifold.Algebra.LieGroup
+public import Mathlib.LinearAlgebra.Matrix.Adjugate
+public import Mathlib.LinearAlgebra.Matrix.BilinearForm
+
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistence
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionLocalDecomposition
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionPrescribedValue
+
+@[expose] public section
 
 /-!
 # Levi–Civita existence: local smooth construction (Koszul)

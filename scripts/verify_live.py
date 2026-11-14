@@ -1,127 +1,420 @@
 #!/usr/bin/env python3
-"""Rebuild every authored module and repeat the eight full-source lint/axiom probes."""
-
+"""Rebuild authored modules, re-elaborate full lint, and audit named transitive axioms."""
 import argparse
+import hashlib
 import json
-from pathlib import Path
 import re
 import subprocess
-import tempfile
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
 
-from verify_evidence import ROOT, lean_code
+ROOT = Path(__file__).resolve().parents[1]
+LINT_IMPORT = 'Mathlib.Tactic.Linter.Lint'
+STANDARD_AXIOMS = {'Classical.choice', 'Quot.sound', 'propext'}
+AUDIT_IMPORTS = ['MathlibExtensions', 'LeviCivitaSmoothness',
+                 'LeviCivitaSmoothness.Examples.MetricConsumer']
 
-ARTIFACTS = ROOT / "verification-artifacts"
-LINT_IMPORT = "Mathlib.Tactic.Linter.Lint"
-LINT_SOURCES = (
-    "LeviCivitaSmoothness/KoszulTransfer.lean",
-    "LeviCivitaSmoothness/MathlibBridge.lean",
-    "LeviCivitaSmoothness/MetricApplication.lean",
-    "LeviCivitaSmoothness/HomRecovery.lean",
-    "LeviCivitaSmoothness/AxiomAudit.lean",
-    "LeviCivitaSmoothness/HomAxiomAudit.lean",
-    "LeviCivitaSmoothness.lean",
-    "MathlibExtensions.lean",
-)
-STANDARD_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
-AXIOM_THEOREMS = {
-    "LeviCivitaSmoothness/AxiomAudit.lean": (
-        "MathlibExtensions.Geometry.Manifold.VectorBundle.SmoothTangentSection."
-        "exists_leviCivitaTangentConnectionFromMetric",
-        "LeviCivitaSmoothness.eq_covDerivFromMetric_of_koszul",
-        "LeviCivitaSmoothness.leviCivitaConnection_eq_covDerivFromMetric",
-        "LeviCivitaSmoothness.contMDiff_leviCivitaConnection_smooth_pair",
-        "LeviCivitaSmoothness.contMDiff_leviCivitaConnection_fromMetric",
-    ),
-    "LeviCivitaSmoothness/HomAxiomAudit.lean": (
-        "LeviCivitaSmoothness.contMDiff_hom_of_smooth_apply",
-        "LeviCivitaSmoothness.contMDiffCovariantDerivative_leviCivitaConnection",
-        "LeviCivitaSmoothness.contMDiffCovariantDerivative_leviCivitaConnection_fromMetric",
-    ),
-}
+if not __debug__:
+    raise SystemExit('Verification requires enabled Python assertions; omit -O/PYTHONOPTIMIZE.')
 
 
-def authored_sources():
-    sources = [ROOT / "MathlibExtensions.lean", ROOT / "LeviCivitaSmoothness.lean"]
-    for directory in ("MathlibExtensions", "LeviCivitaSmoothness"):
-        sources.extend(sorted((ROOT / directory).rglob("*.lean")))
-    return sources
+def uncomment(source):
+    """Erase nested Lean comments and strings while preserving command line positions."""
+    result, index, depth, quoted = [], 0, 0, False
+    while index < len(source):
+        pair = source[index:index + 2]
+        char = source[index]
+        if depth:
+            if pair == '/-':
+                depth += 1
+                result.extend('  ')
+                index += 2
+            elif pair == '-/':
+                depth -= 1
+                result.extend('  ')
+                index += 2
+            else:
+                result.append('\n' if char == '\n' else ' ')
+                index += 1
+        elif quoted:
+            if char == '\\':
+                result.extend('  ')
+                index += 2
+            else:
+                quoted = char != '"'
+                result.append('\n' if char == '\n' else ' ')
+                index += 1
+        elif pair == '/-':
+            depth = 1
+            result.extend('  ')
+            index += 2
+        elif pair == '--':
+            end = source.find('\n', index)
+            end = len(source) if end < 0 else end
+            result.extend(' ' * (end - index))
+            index = end
+        elif char == '"':
+            quoted = True
+            result.append(' ')
+            index += 1
+        else:
+            result.append(char)
+            index += 1
+    assert not depth and not quoted, 'Unterminated comment or string'
+    return ''.join(result)
 
 
-def cache_imports():
+def declarations(source):
+    """Enumerate explicit public names; anonymous and generated declarations are separate."""
+    stack, names = [], []
+    for line in uncomment(source).splitlines():
+        if line != line.lstrip():
+            continue
+        line = re.sub(r'^@\[[^\]]*\]\s*', '', line)
+        match = re.match(r'namespace\s+([\w.]+)', line)
+        if match:
+            stack.append(('namespace', match[1]))
+            continue
+        section = re.match(r'(?:(?:public|private|noncomputable)\s+)*section(?:\s+(\w+))?$', line)
+        if section:
+            stack.append(('section', section[1] or ''))
+            continue
+        ending = re.fullmatch(r'end(?:\s+([\w.]+))?\s*', line)
+        if ending:
+            assert stack, line
+            if ending[1]:
+                while stack and stack[-1][0] == 'section' and not stack[-1][1]:
+                    stack.pop()
+                assert stack and stack[-1][1] == ending[1], line
+            stack.pop()
+            continue
+        match = re.match(
+            r'((?:(?:public|private|protected|noncomputable|unsafe)\s+)*)'
+            r'(?:theorem|lemma|def|abbrev|structure|class|instance)\s+([\w.]+)', line)
+        if match and 'private' not in match[1].split():
+            prefix = [name for kind, name in stack if kind == 'namespace']
+            names.append('.'.join(prefix + [match[2]]))
+    # Lean permits namespaces and sections to remain open at end of a source file.
+    return names
+
+
+
+def check_diagnostics(output, *, json_mode=False):
+    """Fail closed on native/JSON diagnostics, including erroneous zero-exit output."""
+    def check_text(text):
+        assert not re.search(r'(?i)\bpanic\b', text), 'Native panic'
+        assert not re.search(r'(^|: )(?:warning|error):', text, re.M), text
+
+    check_text(output)
+    for raw in output.splitlines():
+        line = re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]', '', raw).strip()
+        if not line:
+            continue
+        check_text(line)
+        if not json_mode and not line.startswith('{'):
+            continue
+        try:
+            message = json.loads(line)
+        except json.JSONDecodeError as error:
+            raise AssertionError('Malformed diagnostic JSON: ' + line) from error
+        assert isinstance(message, dict), 'Unknown diagnostic JSON'
+        assert message.get('severity') in {'information', 'warning', 'error'}, message
+        assert isinstance(message.get('data'), str), message
+        assert message['severity'] == 'information', message
+        check_text(message['data'])
+
+
+def imported_modules(source):
+    """Read every ordinary import; unsupported header syntax fails closed."""
+    tokens = re.findall(r"[A-Za-z_][\w.']*|[^\s]", uncomment(source))
+    boundary = {'import', 'prelude', 'module', 'public', 'private', 'meta', 'open',
+                'namespace', 'section', 'noncomputable', 'universe', 'universes',
+                'variable', 'variables', 'export', 'attribute', 'set_option',
+                'theorem', 'lemma', 'def', 'abbrev', 'instance', 'structure', 'class',
+                'end', 'example', 'axiom', 'constant', 'opaque', 'inductive',
+                'syntax', 'macro', 'elab', 'initialize', '#', '@'}
+    modules = []
+    for index, token in enumerate(tokens):
+        if token != 'import':
+            continue
+        index += 1
+        if index < len(tokens) and tokens[index] == 'all':
+            index += 1
+        start = len(modules)
+        while index < len(tokens) and tokens[index] not in boundary:
+            name = tokens[index]
+            assert re.fullmatch(r"[A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)*",
+                                name), 'Unsupported import header: ' + name
+            modules.append(name)
+            index += 1
+        assert len(modules) > start, 'Empty or unsupported import header'
+    return modules
+
+
+def clear_authored_artifacts(root, source_files):
+    """Force authored recompilation without deleting or traversing dependency caches."""
+    library = root / '.lake' / 'build' / 'lib' / 'lean'
+    suffixes = ('.olean', '.ilean', '.ir', '.trace')
+    removed = []
+    for relative in source_files:
+        source = Path(relative)
+        assert not source.is_absolute() and '..' not in source.parts
+        assert source.suffix == '.lean', relative
+        module = library / source.with_suffix('')
+        current = root
+        for part in module.parent.relative_to(root).parts:
+            current = current / part
+            assert not current.is_symlink(), 'Linked authored artifact directory: ' + str(current)
+            assert not current.exists() or current.is_dir(), str(current)
+        if not module.parent.is_dir():
+            continue
+        for artifact in sorted(module.parent.iterdir()):
+            if not any(artifact.name == module.name + suffix or
+                       artifact.name.startswith(module.name + suffix + '.')
+                       for suffix in suffixes):
+                continue
+            assert artifact.is_file() or artifact.is_symlink(), str(artifact)
+            artifact.unlink()
+            removed.append(str(artifact.relative_to(root)))
+    return removed
+
+
+def manifest_dependencies(packages):
+    """Read supported single-component Lake names without changing package paths or pins."""
+    dependencies = {}
+    for entry in packages:
+        serialized = entry['name']
+        assert isinstance(serialized, str), 'Non-string manifest package name'
+        name = (serialized[1:-1] if serialized.startswith('«') and serialized.endswith('»')
+                else serialized)
+        assert re.fullmatch(r'[A-Za-z_][A-Za-z0-9_-]*', name), \
+            'Unsupported manifest package name: ' + serialized
+        assert name not in dependencies, 'Duplicate manifest package name: ' + name
+        dependencies[name] = entry
+    return dependencies
+
+
+def allowed_import(module, roots):
+    """Recognize focused Mathlib imports and the declared library module roots."""
+    return module.startswith('Mathlib.') or any(
+        module == root or module.startswith(root + '.') for root in roots)
+
+
+def authored_sources(root=ROOT):
+    """List live library sources, keeping immutable evidence snapshots outside this scope."""
+    return sorted(path for path in root.rglob('*.lean')
+                  if str(path.relative_to(root)) != 'lakefile.lean'
+                  and not {'.lake', '.git', 'evidence', 'verification-artifacts'} &
+                  set(path.relative_to(root).parts))
+
+
+def cache_imports(root=ROOT):
     modules = {LINT_IMPORT}
-    for source in authored_sources():
-        modules.update(re.findall(r"^import\s+(Mathlib\.\S+)",
-                                  lean_code(source.read_text()), re.M))
+    for source in authored_sources(root):
+        modules.update(name for name in imported_modules(source.read_text())
+                       if name.startswith('Mathlib.'))
     return sorted(modules)
 
 
-def cache_command():
-    """Resolve focused imports through Lake's module search path."""
-    return ["lake", "exe", "cache", "get", *cache_imports()]
+def cache_command(root=ROOT):
+    return ['lake', 'exe', 'cache', 'get', *cache_imports(root)]
 
 
-def check_diagnostics(output, source):
-    messages = [json.loads(line) for line in output.splitlines() if line.strip()]
-    assert messages, f"No Lean diagnostics: {source}"
-    for message in messages:
-        assert message["severity"] == "information", message
-    data = [message["data"] for message in messages]
-    assert any("All linting checks passed!" in text
-               and "Found 0 errors" in text
-               and "with 16 linters" in text for text in data), source
-    expected = AXIOM_THEOREMS.get(str(source.relative_to(ROOT)), ())
-    actual = []
-    for text in data:
-        match = re.fullmatch(r"'([^']+)' depends on axioms:\s*\[(.*?)\]", text, re.S)
-        if match:
-            actual.append(match[1])
-            axioms = {name.strip() for name in match[2].split(",") if name.strip()}
-            assert axioms <= STANDARD_AXIOMS, (match[1], axioms)
-    assert tuple(actual) == expected, (source, expected, actual)
+def checked_path(root, relative):
+    """Refuse source/configuration routes that escape or traverse symbolic links."""
+    path = Path(relative)
+    assert not path.is_absolute() and '..' not in path.parts, relative
+    current = root
+    for part in path.parts:
+        current = current / part
+        assert not current.is_symlink(), 'Linked verification input: ' + relative
+    assert current.is_file(), relative
+    return current
 
 
-def run(command, log):
-    print("+ " + " ".join(command), flush=True)
-    result = subprocess.run(command, cwd=ROOT, text=True, stdout=subprocess.PIPE,
-                            stderr=subprocess.STDOUT)
-    log.write_text(result.stdout)
-    print(result.stdout, end="", flush=True)
-    result.check_returncode()
-    return result.stdout
+def input_binding(root, config):
+    sources = [str(path.relative_to(root)) for path in authored_sources(root)]
+    assert sources == config['source_files'], 'Authored Lean file coverage differs from inventory'
+    assert len(sources) == config['source_count'] == 28, 'Expected all 28 authored sources'
+    paths = sources + ['lean-toolchain', 'lakefile.lean', 'lake-manifest.json',
+                       'evidence/live-inventory.json', 'scripts/verify_live.py',
+                       'scripts/verify_evidence.py', 'scripts/test_verify_live.py',
+                       'scripts/test_verify_evidence.py']
+    binding = {name: hashlib.sha256(checked_path(root, name).read_bytes()).hexdigest()
+               for name in paths}
+    assert {name: binding[name] for name in sources} == config['source_sha256'], \
+        'Live source hash differs from inventory'
+    assert {name: binding[name] for name in config['configuration_sha256']} == \
+        config['configuration_sha256'], 'Configuration hash differs from inventory'
+    return binding
 
 
-def verify():
-    ARTIFACTS.mkdir(exist_ok=True)
-    sources = authored_sources()
-    targets = ["+" + str(source.relative_to(ROOT).with_suffix("")).replace("/", ".")
-               + ":olean" for source in sources]
-    # Explicit targets include all 19 construction files, even if an import root changes.
-    run(["lake", "--rehash", "--wfail", "build", *targets], ARTIFACTS / "strict-build.log")
-    with tempfile.TemporaryDirectory(prefix="levi-civita-lint-") as temporary:
-        probe_root = Path(temporary)
-        for relative in LINT_SOURCES:
-            source = ROOT / relative
-            original = source.read_bytes()
-            probe = probe_root / relative
-            probe.parent.mkdir(parents=True, exist_ok=True)
-            probe.write_text(f"import {LINT_IMPORT}\n" + original.decode()
-                             + "\n#lint+ docBlame docBlameThm\n")
-            output = run(["lake", "env", "lean", "-j2", "--json",
-                          f"--root={probe_root}", str(probe)],
-                         ARTIFACTS / (relative.replace("/", "-") + ".jsonl"))
-            check_diagnostics(output, source)
-            assert source.read_bytes() == original, f"Source changed during lint: {relative}"
-    print(f"Verified {len(sources)} strict authored targets and {len(LINT_SOURCES)} "
-          "full-source probes with 16 linters; all eight axiom probes passed.")
+def dependency_binding(root, config):
+    assert config['public_dependencies'].get('mathlib') == {
+        'rev': '56a005855ea17e0b0958f73ec801ae140b0a1679',
+        'url': 'https://github.com/leanprover-community/mathlib4'}, 'Wrong pinned Mathlib'
+    manifest = json.loads(checked_path(root, 'lake-manifest.json').read_text())
+    dependencies = manifest_dependencies(manifest['packages'])
+    assert set(dependencies) == set(config['public_dependencies']), 'Dependency inventory differs'
+    result = {}
+    for name, expected in config['public_dependencies'].items():
+        actual = dependencies[name]
+        assert actual['type'] == 'git' and actual['rev'] == expected['rev'], name
+        assert actual['url'] == expected['url'], name
+        assert re.fullmatch(r'[0-9a-f]{40}', expected['rev']), name
+        assert re.fullmatch(r'https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+',
+                            expected['url']), name
+        path = root
+        for part in ('.lake', 'packages', name):
+            path = path / part
+            assert path.is_dir() and not path.is_symlink(), 'Linked/missing dependency: ' + name
+        command = ['git', '--no-optional-locks', '--no-replace-objects', '-C', str(path)]
+        head = subprocess.check_output(command + ['rev-parse', 'HEAD'], text=True).strip()
+        assert head == expected['rev'], 'Dependency HEAD mismatch: ' + name
+        flags = subprocess.check_output(command + ['ls-files', '-v', '-z'], text=True)
+        assert flags and all(record.startswith('H ') for record in flags.split('\0') if record), \
+            'Hidden or unsupported tracked dependency state: ' + name
+        dirty = subprocess.check_output(command + ['status', '--porcelain',
+                                                   '--untracked-files=no'], text=True)
+        assert not dirty.strip(), 'Modified tracked dependency: ' + name
+        result[name] = {'rev': head, 'url': actual['url'], 'tracked_worktree_clean': True}
+    return result
 
 
-if __name__ == "__main__":
+def lint_probe(source):
+    assert re.search(r'^module$', source, re.M), 'Missing module header'
+    return source.replace('module\n', 'module\nimport ' + LINT_IMPORT + '\n', 1) + \
+        '\n#lint+ docBlame docBlameThm\n'
+
+
+def lint_result(output):
+    check_diagnostics(output, json_mode=True)
+    data = '\n'.join(json.loads(line)['data'] for line in output.splitlines() if line.strip())
+    assert 'All linting checks passed!' in data and 'Found 0 errors' in data \
+        and 'with 16 linters' in data, 'Missing complete zero-error full16 lint result'
+    return data
+
+
+def axiom_reports(output, names):
+    check_diagnostics(output, json_mode=True)
+    data = '\n'.join(json.loads(line)['data'] for line in output.splitlines() if line.strip())
+    pattern = r"'([\w.]+)' (?:depends on axioms:\s*\[([^\]]*)\]|does not depend on any axioms)"
+    reports = re.findall(pattern, data)
+    assert len(reports) == len(names) and [name for name, _ in reports] == names, \
+        'Missing, duplicate, reordered or unexpected axiom declaration'
+    result = {}
+    for name, raw in reports:
+        axioms = {value.strip() for value in raw.split(',') if value.strip()}
+        assert axioms <= STANDARD_AXIOMS, (name, axioms)
+        result[name] = sorted(axioms)
+    return result
+
+
+def source_declarations(root, config):
+    """Check trust/import scope and the complete explicit public declaration inventory."""
+    roots = ['MathlibExtensions', 'LeviCivitaSmoothness']
+    names = []
+    for relative in config['source_files']:
+        source = (root / relative).read_text()
+        code = uncomment(source)
+        assert not re.search(r'\b(?:sorry|admit|sorryAx)\b', code), relative
+        assert not re.search(r'^\s*(?:@\[[^\]]*\]\s*)*'
+                             r'(?:(?:public|private|protected|unsafe|noncomputable)\s+)*'
+                             r'(?:axiom|constant)\b', code, re.M), relative
+        assert not re.search(r'set_option\s+debug\.skipKernelTC\s+true', code), relative
+        for module in imported_modules(source):
+            assert allowed_import(module, roots), (relative, module)
+            if not module.startswith('Mathlib.'):
+                assert module.replace('.', '/') + '.lean' in config['source_files'], module
+        names.extend(declarations(source))
+    assert names and len(names) == len(set(names)), 'Duplicate or empty public inventory'
+    assert names == config['declarations'], 'Declaration inventory differs from actual sources'
+    return names
+
+
+def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--cache", action="store_true",
-                        help="fetch only the Mathlib import closure needed by these checks")
+    parser.add_argument('--evidence-dir', type=Path)
+    parser.add_argument('--cache', action='store_true',
+                        help='fetch focused Mathlib imports; this is not qualification')
     args = parser.parse_args()
+    root = Path(__file__).resolve().parents[1]
+    config = json.loads((root / 'evidence/live-inventory.json').read_text())
+    initial = input_binding(root, config)
+    assert config['audit_imports'] == AUDIT_IMPORTS, 'Use advertised roots and opt-in example'
+    assert (root / 'lean-toolchain').read_text().strip() == 'leanprover/lean4:v4.35.0'
+    dependencies = dependency_binding(root, config)
     if args.cache:
-        # Module names resolve inside the pinned Mathlib package through Lake's search path.
-        subprocess.run(cache_command(), cwd=ROOT, check=True)
-    else:
-        verify()
+        subprocess.run(cache_command(root), cwd=root, check=True)
+        assert input_binding(root, config) == initial, 'Inputs changed during cache fetch'
+        assert dependency_binding(root, config) == dependencies, 'Dependencies changed'
+        return
+    stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
+    evidence = (args.evidence_dir or root / 'verification-artifacts' / stamp).resolve()
+    evidence.mkdir(parents=True, exist_ok=False)
+    record = {'status': 'running', 'stages': [], 'input_sha256': initial,
+              'source_sha256': config['source_sha256'], 'axioms': {},
+              'dependency_revisions': dependencies,
+              'scope': 'Current 4.35 authored source; historical receipts are separate',
+              'audit_imports': config['audit_imports']}
+
+    def save():
+        (evidence / 'qualification.json').write_text(json.dumps(record, indent=2) + '\n')
+
+    def run(name, command):
+        result = subprocess.run(command, cwd=root, text=True, stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT)
+        log = evidence / (name + '.log')
+        log.write_text(result.stdout)
+        record['stages'].append({'name': name, 'command': command,
+                                 'exit_code': result.returncode,
+                                 'log_sha256': hashlib.sha256(log.read_bytes()).hexdigest()})
+        save()
+        print(name, result.returncode, flush=True)
+        assert result.returncode == 0, name
+        check_diagnostics(result.stdout)
+        return result.stdout
+
+    try:
+        version = run('compiler-version', ['lake', 'env', 'lean', '--version']).strip()
+        assert 'version 4.35.0,' in version, 'Wrong Lean compiler version'
+        record['compiler_version'] = version
+        names = source_declarations(root, config)
+        record['removed_authored_artifacts'] = clear_authored_artifacts(root, config['source_files'])
+        save()
+        targets = ['+' + str(Path(p).with_suffix('')).replace('/', '.') + ':olean'
+                   for p in config['source_files']]
+        run('exact-build', ['lake', '--rehash', '--wfail', 'build', *targets])
+        for relative in config['source_files']:
+            artifact = root / '.lake/build/lib/lean' / Path(relative).with_suffix('.olean')
+            assert artifact.is_file() and not artifact.is_symlink(), \
+                'Missing fresh authored artifact: ' + relative
+        for relative in config['source_files']:
+            path = evidence / 'lint-sources' / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(lint_probe((root / relative).read_text()))
+            output = run('lint-' + relative.replace('/', '-'),
+                         ['lake', 'env', 'lean', '-j2', '--json',
+                          '--root=' + str(evidence / 'lint-sources'), str(path)])
+            lint_result(output)
+        probe = 'module\n' + '\n'.join('import ' + name for name in config['audit_imports'])
+        probe += '\n' + '\n'.join('#print axioms ' + name for name in names) + '\n'
+        (evidence / 'axioms.lean').write_text(probe)
+        output = run('axioms', ['lake', 'env', 'lean', '-j2', '--json', str(evidence / 'axioms.lean')])
+        record['axioms'] = axiom_reports(output, names)
+        assert input_binding(root, config) == initial, 'Inputs changed during verification'
+        assert dependency_binding(root, config) == dependencies, 'Dependencies changed during verification'
+        record.update(status='passed', full_linter_count=16, source_count=len(config['source_files']),
+                      named_declaration_count=len(names), final_input_sha256=initial,
+                      completed_utc=datetime.now(timezone.utc).isoformat())
+        save()
+        print('PASS:', len(config['source_files']), 'files;', len(names), 'named declarations')
+    except Exception as error:
+        record.update(status='failed', failure=str(error))
+        save()
+        raise
+
+
+if __name__ == '__main__':
+    main()

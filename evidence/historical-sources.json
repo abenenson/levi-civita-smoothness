@@ -1,0 +1,199 @@
+{
+  "scope": "Historical Lean 4.34.1 evidence only; does not certify current Lean 4.35 sources. Original receipts remain unchanged.",
+  "public_repository": "https://github.com/abenenson/levi-civita-smoothness",
+  "public_revision": "60dc2a39e6d8ac0a78d038fe6f9ccf8c0e5bfa7a",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "mathlib_commit": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "source_snapshots": {
+    "LeviCivitaSmoothness.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/LeviCivitaSmoothness.lean.txt",
+      "sha256": "51f3019397421d1c4d82e0cd23c22fb712c5dc5d3be0158a49e1fd75679de430",
+      "lines": 8
+    },
+    "LeviCivitaSmoothness/AxiomAudit.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/LeviCivitaSmoothness/AxiomAudit.lean.txt",
+      "sha256": "99cf44451832d788a90d6d399bed9cc1dd00c27d507a18bb5df08172cc73101c",
+      "lines": 17
+    },
+    "LeviCivitaSmoothness/HomAxiomAudit.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/LeviCivitaSmoothness/HomAxiomAudit.lean.txt",
+      "sha256": "02e0489afba1115d82045bc98aa85828dddefc85ef5aee1d1b1a68c6511a4860",
+      "lines": 12
+    },
+    "LeviCivitaSmoothness/HomRecovery.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/LeviCivitaSmoothness/HomRecovery.lean.txt",
+      "sha256": "88d47181b0aa599828f95e1829cd6b4a1407358ca26a6528e1e5776a44e88fe9",
+      "lines": 117
+    },
+    "LeviCivitaSmoothness/KoszulTransfer.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/LeviCivitaSmoothness/KoszulTransfer.lean.txt",
+      "sha256": "db3890e6b94ed3c531d0e0c2dba02246a954bf12a5b3cfed1b7e7b183ce571af",
+      "lines": 82
+    },
+    "LeviCivitaSmoothness/MathlibBridge.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/LeviCivitaSmoothness/MathlibBridge.lean.txt",
+      "sha256": "377cdb6c831011210352f45758e9158d02be0e4b4ba20bcfd7295312762f341c",
+      "lines": 89
+    },
+    "LeviCivitaSmoothness/MetricApplication.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/LeviCivitaSmoothness/MetricApplication.lean.txt",
+      "sha256": "df2d805d36f4c1f495db93017b021ea04b12a56bf65a1987fb61c7aa2f09c576",
+      "lines": 43
+    },
+    "MathlibExtensions.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions.lean.txt",
+      "sha256": "d66d02a26e2f6444394a9467f1eeab9be813284271f8de960fc133de0f672ac3",
+      "lines": 8
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/Connection.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/Connection.lean.txt",
+      "sha256": "364e9b94f2e116b7b94438d49221b67a1a7723cf8e60cd612e3ac46c13ba90c0",
+      "lines": 180
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentConnectionFromMetric.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentConnectionFromMetric.lean.txt",
+      "sha256": "b9500118c28dd1752a0f3fd080d7207924d4d344668eebaadcf2d12b7b4da1be",
+      "lines": 757
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistence.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistence.lean.txt",
+      "sha256": "85e44ad721f007c379f09a1560d601755bfecd733db4abd3871ce75cfe7f4ece",
+      "lines": 931
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistenceLocal.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistenceLocal.lean.txt",
+      "sha256": "85463bba04d4edbc4d96c39f18815fe39a968f2c9ffc00621bc9f79cbe63004a",
+      "lines": 534
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistenceTheorem.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentExistenceTheorem.lean.txt",
+      "sha256": "16b16f2894b3af6a8a34f33db53105c0f0b15bacb0f14331b6ddeccd637bdb8b",
+      "lines": 283
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentUniqueness.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/LeviCivitaTangentUniqueness.lean.txt",
+      "sha256": "85c608af7a393d56215d25c1a38e3c4e4807e36b7b3f4f7c0faef24cb47f1985",
+      "lines": 183
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/RiemannianTangentBundle.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/RiemannianTangentBundle.lean.txt",
+      "sha256": "4d28be42cd839b9738647fc1b3edc7616b6e66df98a2f2f9c0df4628a298aa14",
+      "lines": 123
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/RiemannianTangentInnerCInfinity.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/RiemannianTangentInnerCInfinity.lean.txt",
+      "sha256": "7a682a742100de0c2f91bfc41266e731c94db5cbf88c67c4936687cd17aa14ff",
+      "lines": 157
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentConnection.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/TangentConnection.lean.txt",
+      "sha256": "8e0a624c36c5184c48f55a4143e9a02d25917b99028a4b1dad0f789651f99cee",
+      "lines": 107
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentLieBracket.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/TangentLieBracket.lean.txt",
+      "sha256": "e8865815b95e29196cdcd8534153b3b20f82ed3fdc1e393110f0bbde1a611664",
+      "lines": 104
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionCInfinityLinearAtPoint.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionCInfinityLinearAtPoint.lean.txt",
+      "sha256": "dbf68372c176691b4a7023dff654d8d206b292942506b1eb48d0d1b5a182ce4c",
+      "lines": 346
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionDerivation.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionDerivation.lean.txt",
+      "sha256": "e788d32f64bf07509c03fc89607b605757631cdb92d017fbcec49102576868b8",
+      "lines": 109
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionLieBracket.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionLieBracket.lean.txt",
+      "sha256": "018fe4b6f03d00f64f239f82ebae39fe1bf787c05665672098801bffbb5e837a",
+      "lines": 291
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionLocalDecomposition.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionLocalDecomposition.lean.txt",
+      "sha256": "61c3a765ca3b2c87972462412f40779a2a2e7fbd31735727d552f1c0c55a1931",
+      "lines": 202
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionPrescribedValue.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSectionPrescribedValue.lean.txt",
+      "sha256": "d4c9bfbd360a82ec3b6d5f0812726410ab63b0864dd5c6628c7c359ac9685a05",
+      "lines": 379
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSpaceFiniteDimensional.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/TangentSpaceFiniteDimensional.lean.txt",
+      "sha256": "86ad87b2d2804413319c5cd1d1bc367d7f5d6c8f775cb400048e985d7c7cb80a",
+      "lines": 69
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorBundle/TangentVectorFieldDerivation.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorBundle/TangentVectorFieldDerivation.lean.txt",
+      "sha256": "d8a581c389e050428b453b6d0ee2c4eab5f517b2310f1d8cbfa4bcea2e4eb9e6",
+      "lines": 180
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorField/LieBracket.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorField/LieBracket.lean.txt",
+      "sha256": "5c77c244e072fb1434aa3fbd86131d907e05a60896aa4f777317f3997d702f6c",
+      "lines": 60
+    },
+    "MathlibExtensions/Geometry/Manifold/VectorField/Pullback.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/sources/MathlibExtensions/Geometry/Manifold/VectorField/Pullback.lean.txt",
+      "sha256": "ba2611d19c162fda7ead89e3011bd62f68f1faa44af75ad7d440181e1df0d541",
+      "lines": 42
+    }
+  },
+  "configuration_snapshots": {
+    "lean-toolchain": {
+      "snapshot": "evidence/historical/lean-4.34.1/lean-toolchain",
+      "sha256": "0fbd6253482ea3f6f129d0f176c9f6296e49a67b71d52f4c2c23bdc058bf9350"
+    },
+    "lakefile.lean": {
+      "snapshot": "evidence/historical/lean-4.34.1/lakefile.lean.txt",
+      "sha256": "bd026417001fc252a4ad2942be15b2447fafde65b832f1044ebe896ea3e69828"
+    },
+    "lake-manifest.json": {
+      "snapshot": "evidence/historical/lean-4.34.1/lake-manifest.json",
+      "sha256": "9db6287504a64e44d46f7f7e600b816744b627c3b5819de92d59218b2fd6e741"
+    }
+  },
+  "original_evidence_sha256": {
+    "evidence/builds/bridge-final-resources.json": "9265fc6ce851af0b5bc6669f95db8b447dd896bdfaaf6d1f805c5e00d8ea0b91",
+    "evidence/builds/bridge-final.log": "bcc700371d395724faee6b8ee35c33390d17058c92c30edcea0c7af03419f352",
+    "evidence/builds/docs-strict-resources.json": "8321e2580c9afed9239ea92bd49778e5f401cab17f2720b194b8ccc6bda383ee",
+    "evidence/builds/docs-strict.log": "f5647f2e38aa148b8e929a16fc4fabbd0ac91c40e9237b0d16ddf3108bb4d171",
+    "evidence/builds/exact-core-resources.json": "eacff6274ca8a8eea6f6d4a9aab84b378e6bf94c87a31207fd481f8756efcbab",
+    "evidence/builds/exact-core.log": "cfb24ce0e4145ca796189d5c1449af1732667bb9712a08fd56326b14319cc691",
+    "evidence/builds/full-source-lint-resources.json": "c10aa3490cd259ab5a830b405a7654a8d8988ee4503f14c3374c0fc58c37b570",
+    "evidence/builds/full-source-lint.log": "efbafeda9bef8d4d71533c31535caa19322df62b8cc731390f7a55e497331a33",
+    "evidence/builds/hom-recovery-resources.json": "ae538164d42273a8e6f7fe5d4f1612a0ffc27215ce293db5a9502b37a4cb4a87",
+    "evidence/builds/hom-recovery.log": "c9b0e114615e009626ef02b1c28468dd2118145f2ca34cc4675a08f6f17283ba",
+    "evidence/builds/mechanical-style.log": "8b337ea115d080fd87bbc0ce1fd26273012341f521f02fc5c550a2a1e07a8e5b",
+    "evidence/full-lint/logs/LeviCivitaSmoothness-AxiomAudit.lean.log": "4089b24adddb6ead9f9bd8e985952535bc12504e648c34267b4ee1262c7777d3",
+    "evidence/full-lint/logs/LeviCivitaSmoothness-HomAxiomAudit.lean.log": "c4db7e3f96c1de2fe0c6b28d5cb1dfe11d0f7f2dcc60257843c0f775f162821f",
+    "evidence/full-lint/logs/LeviCivitaSmoothness-HomRecovery.lean.log": "902f2f1d9a126abe0775fc1d7cf41860d198755c349874330e94d9a4704df2ec",
+    "evidence/full-lint/logs/LeviCivitaSmoothness-KoszulTransfer.lean.log": "c2ddea99f7db5f20bf52c36b9053da6766ce154d73c98169fc59b911e9d4126d",
+    "evidence/full-lint/logs/LeviCivitaSmoothness-MathlibBridge.lean.log": "8851d3d47254918c7210be8cda3ed9416b416b5b10a773cbb7a9f64a9d6cc8f9",
+    "evidence/full-lint/logs/LeviCivitaSmoothness-MetricApplication.lean.log": "9c36eba690f3acabbc0eec04f5c5e7a7345192cba63baba516141a92d0d53797",
+    "evidence/full-lint/logs/LeviCivitaSmoothness.lean.log": "1e120bbd1cd315dbdd07f8fc78059b1caf49bc2ecf843d0ee5ffc8cab01cab87",
+    "evidence/full-lint/logs/MathlibExtensions.lean.log": "98d02b8f50c475f586275bf08c298c9b06a3ce1f2fdbcc7454f710180f14e4d1",
+    "evidence/full-lint/probes/LeviCivitaSmoothness/AxiomAudit.lean.txt": "cb47fac8d95eb3ec066c31a2e1655f67030b480ae511ee3e2aa6c272b17bbfd3",
+    "evidence/full-lint/probes/LeviCivitaSmoothness/HomAxiomAudit.lean.txt": "6604f87d65a53ff213fc7653dfcff72f8563d7b71c6d6ee0465e665f35566851",
+    "evidence/full-lint/probes/LeviCivitaSmoothness/HomRecovery.lean.txt": "65cd773d4da9bfb194e07b3130786c0a83d9d4a8fae36ee99ab4f9f07dddd440",
+    "evidence/full-lint/probes/LeviCivitaSmoothness/KoszulTransfer.lean.txt": "acbd1b907904f35d12f0e66a243e5c19267eb9df1cb20bac317594b901b3fb93",
+    "evidence/full-lint/probes/LeviCivitaSmoothness/MathlibBridge.lean.txt": "27484e3e82aa7c33083dbf80f5c2180981fd99cb7d5d994b1b56a7a28dd6cbb9",
+    "evidence/full-lint/probes/LeviCivitaSmoothness/MetricApplication.lean.txt": "973a29bffaa5b71d999bf9124c68482c4011f32434a6a34321a4f93a7103288a",
+    "evidence/full-lint/probes/LeviCivitaSmoothness.lean.txt": "5eeb61c2c59d44248735e95d1139c2d63267ed68cda9d89ba55e7b25c8fde44f",
+    "evidence/full-lint/probes/MathlibExtensions.lean.txt": "a3d1bb58abf59b3eb2b7d846eaddac1d5fd8654ccbdd8edaa4389ad48eb084ca",
+    "evidence/hom-validation.json": "d0e5ff45b0f9ead4672918b041672dd68ea3cd4e4f82610ae6c054a48b53b01e",
+    "evidence/lint-validation.json": "829a6bd1dca999ed4a5de7dc30bae0bf97a1630e5d4777b6d2bdd6f3cc55151b",
+    "evidence/missing-mathlib-imports.json": "daaac6c552db21d0615f4f2ef0ca334c28dc8a92947983388c168b2a081da0e4",
+    "evidence/provenance.json": "d245d5873c9121d441650ab88d7c69816b094f97e6bf06c584e5e92e40f28aa8",
+    "evidence/source-manifest.json": "528407b75acdf043bf3689e05280889db85dae28a220ce234f2d02783201a221",
+    "evidence/upstream/Basic.lean": "4b323cd5d8276b72f0ba03cf4a69ccadc6e51e9f675ca744b7428c6205d5632b",
+    "evidence/upstream/LeviCivita.lean": "2f06400f30d5e5be12b76ac151067f3e1c4873a4126028352dd107e1ad8db80c",
+    "evidence/upstream/Metric.lean": "68afb6d6a57c4f2b6c3cfa4a64ca123809ee34635167822aebae6a4674dc908f",
+    "evidence/upstream/Riemannian.lean": "2cbcce03599ec5f68e4174db82333b15f563efe9d0dbce1a71bef03f829ef071",
+    "evidence/upstream/Torsion.lean": "ba18cad8244b589123361142812898a37e7931aec7378716eb990fc0cff82387",
+    "evidence/upstream/pr-status.json": "18e1636ad1333c825a7691380e4af8efca99fe6e21f7ec876643d5c981d649bc",
+    "evidence/validation.json": "51f6f49b7da73dbc067e2327dd4f977f62da0866fed5d9d37936a922042b97f9"
+  }
+}

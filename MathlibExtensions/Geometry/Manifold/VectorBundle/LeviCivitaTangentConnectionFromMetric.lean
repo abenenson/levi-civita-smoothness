@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
 
-import Mathlib.Geometry.Manifold.ContMDiff.Defs
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistence
-import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistenceLocal
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentConnection
+public import Mathlib.Geometry.Manifold.ContMDiff.Defs
+
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistence
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.LeviCivitaTangentExistenceLocal
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentConnection
+
+@[expose] public section
 
 /-!
 # Levi–Civita construction on `TM` from a smooth metric (global `covDeriv`)

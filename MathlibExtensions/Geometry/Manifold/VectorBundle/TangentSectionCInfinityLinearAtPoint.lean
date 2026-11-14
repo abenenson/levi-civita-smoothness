@@ -4,16 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Adam Benenson
 -/
 
-import Mathlib.Algebra.BigOperators.Pi
-import Mathlib.Geometry.Manifold.Algebra.SmoothFunctions
-import Mathlib.Geometry.Manifold.BumpFunction
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.Topology.Algebra.Module.FiniteDimension
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorBundle.Connection
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionPrescribedValue
+public import Mathlib.Algebra.BigOperators.Pi
+public import Mathlib.Geometry.Manifold.Algebra.SmoothFunctions
+public import Mathlib.Geometry.Manifold.BumpFunction
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.Connection
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionPrescribedValue
+
+@[expose] public section
 
 /-!
 # `C^∞`-linear maps on smooth tangent sections, evaluated at a point

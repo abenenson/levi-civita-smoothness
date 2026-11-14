@@ -1,7 +1,11 @@
-import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+module
 
-import MathlibExtensions.Geometry.Manifold.VectorBundle.Connection
-import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionDerivation
+public import Mathlib.Geometry.Manifold.VectorBundle.Tangent
+
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.Connection
+public import MathlibExtensions.Geometry.Manifold.VectorBundle.TangentSectionDerivation
+
+@[expose] public section
 
 /-!
 # Tangent-bundle connections (vector-field input)
@@ -67,6 +71,7 @@ noncomputable def covDerivLin (X : Γ∞) : Γ∞ →ₗ[ℝ] Γ∞ :=
     map_add' := by intro s t; simpa using conn.covDeriv_add X s t
     map_smul' := by intro a s; simpa using conn.covDeriv_smul X a s }
 
+/-- The linear endomorphism for a fixed direction evaluates to the covariant derivative. -/
 @[simp]
 theorem covDerivLin_apply (X s : Γ∞) : conn.covDerivLin (I := I) (M := M) X s = conn.covDeriv X s :=
   rfl

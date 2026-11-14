@@ -1,4 +1,8 @@
-import Mathlib.Geometry.Manifold.VectorField.Pullback
+module
+
+public import Mathlib.Geometry.Manifold.VectorField.Pullback
+
+@[expose] public section
 
 /-!
 # Extra lemmas for manifold vector-field pullbacks
@@ -28,11 +32,15 @@ variable {𝕜 : Type*} [NontriviallyNormedField 𝕜]
   {f : M → M'} {s : Set M} {x : M}
   {V : Π x : M', TangentSpace I' x}
 
+/-- Pointwise pullback within a set commutes with scalar multiplication, with the scalar
+function composed with the base map. -/
 lemma mpullbackWithin_smul_fun_apply (c : M' → 𝕜) :
     mpullbackWithin I I' f (fun y ↦ c y • V y) s x =
       c (f x) • mpullbackWithin I I' f V s x := by
   simp [mpullbackWithin_apply, map_smul]
 
+/-- Pointwise pullback commutes with scalar multiplication, with the scalar function
+composed with the base map. -/
 lemma mpullback_smul_fun_apply (c : M' → 𝕜) :
     mpullback I I' f (fun y ↦ c y • V y) x =
       c (f x) • mpullback I I' f V x := by
