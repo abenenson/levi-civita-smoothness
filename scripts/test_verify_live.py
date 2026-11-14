@@ -341,6 +341,71 @@ class VerificationControls(unittest.TestCase):
                 self.assertEqual(json.loads((evidence / 'qualification.json').read_text())['status'],
                                  'failed')
 
+    def run_cold_cache(self, root, *, failure=None):
+        config = fixture_repository(root)
+        dependency = root / '.lake/packages/mathlib'
+        dependency.rmdir()
+        events = []
+
+        def fake_run(command, **kwargs):
+            self.assertEqual(kwargs['env']['MATHLIB_NO_CACHE_ON_UPDATE'], '1')
+            if command == ['lake', 'env', 'lean', '--version']:
+                self.assertFalse(dependency.exists(), 'Fixture must begin with no dependency')
+                events.append('bootstrap')
+                if failure != 'missing-worktree':
+                    dependency.mkdir()
+                if failure == 'bootstrap-failure':
+                    return SimpleNamespace(returncode=1, stdout='Bootstrap failed.\n')
+                if failure == 'wrong-version':
+                    return SimpleNamespace(returncode=0, stdout='Lean (version 4.34.1, fixture)\n')
+                if failure == 'bootstrap-warning':
+                    return SimpleNamespace(returncode=0, stdout='warning: bootstrap diagnostic\n')
+                if failure == 'bootstrap-drift':
+                    path = root / 'lakefile.lean'
+                    path.write_text(path.read_text() + '\n-- Changed during bootstrap.\n')
+                return SimpleNamespace(returncode=0, stdout='Lean (version 4.35.0, fixture)\n')
+            self.assertEqual(command, verify.cache_command(root))
+            self.assertIn('binding', events, 'Focused cache must follow actual pin checks')
+            events.append('cache')
+            if failure == 'cache-drift':
+                path = root / 'MathlibExtensions.lean'
+                path.write_text(path.read_text() + '\n-- Changed during cache fetch.\n')
+            return SimpleNamespace(returncode=0, stdout='Focused cache completed.\n')
+
+        def cold_git(command, **kwargs):
+            self.assertTrue(dependency.is_dir(), 'Actual pin check preceded Lake materialization')
+            self.assertEqual(events[0], 'bootstrap')
+            if 'rev-parse' in command:
+                events.append('binding')
+                if failure == 'wrong-pin':
+                    return 'a' * 40
+            return fixture_git(command)
+
+        with patch.object(verify, '__file__', str(root / 'scripts/verify_live.py')), \
+             patch.object(sys, 'argv', [str(SCRIPT), '--cache']), \
+             patch.object(verify.subprocess, 'run', side_effect=fake_run), \
+             patch.object(verify.subprocess, 'check_output', side_effect=cold_git), \
+             redirect_stdout(io.StringIO()):
+            if failure:
+                with self.assertRaises(AssertionError):
+                    verify.main()
+                if failure != 'cache-drift':
+                    self.assertNotIn('cache', events)
+            else:
+                verify.main()
+        return events
+
+    def test_cold_cache_bootstraps_locked_worktree_then_checks_pins_before_focused_fetch(self):
+        with tempfile.TemporaryDirectory() as temp:
+            events = self.run_cold_cache(Path(temp))
+            self.assertEqual(events, ['bootstrap', 'binding', 'cache', 'binding'])
+
+    def test_cold_cache_rejects_failed_bootstrap_wrong_version_pin_missing_tree_and_drift(self):
+        for failure in ['bootstrap-failure', 'wrong-version', 'wrong-pin', 'missing-worktree',
+                        'bootstrap-warning', 'bootstrap-drift', 'cache-drift']:
+            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as temp:
+                self.run_cold_cache(Path(temp), failure=failure)
+
 
 if __name__ == '__main__':
     unittest.main()
