@@ -74,3 +74,11 @@ The earlier Lean 4.34.1 build, Hom recovery, and eight-file lint receipts under
 They document historical checkpoints; fresh 4.35.0 verification is supplied by the
 live checks. Upstream source snapshots under `evidence/upstream` are historical
 evidence outside the Lean library roots, with their attribution headers preserved.
+
+## Releases and related libraries
+
+Start with the [`v0.1.0` release](https://github.com/abenenson/levi-civita-smoothness/releases/tag/v0.1.0) for the supported toolchain and verification run.
+
+- [rellich-kondrachov](https://github.com/abenenson/rellich-kondrachov) covers Sobolev compactness on compact manifolds.
+
+[Browse the Lean library index](https://adambenenson.com/projects/#formal-methods).
